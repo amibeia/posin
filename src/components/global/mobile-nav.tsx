@@ -14,13 +14,13 @@ export default function MobileNav({ className, ...props }: MobileNavProps) {
 			)}
 			{...props}
 		>
-			<Button variant="ghost" size="icon">
+			<Button variant="ghost" size="icon" className="hover:bg-accent/80">
 				<Home className="size-4 shrink-0" />
 			</Button>
-			<Button variant="ghost" size="icon">
+			<Button variant="ghost" size="icon" className="hover:bg-accent/80">
 				<CirclePlus className="size-4 shrink-0" />
 			</Button>
-			<Button variant="ghost" size="icon">
+			<Button variant="ghost" size="icon" className="hover:bg-accent/80">
 				<ClipboardList className="size-4 shrink-0" />
 			</Button>
 		</nav>

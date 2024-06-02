@@ -6,7 +6,7 @@ import { Separator } from '@/components/ui/separator'
 
 export default function HomePage() {
 	return (
-		<main className="mx-auto flex h-screen max-w-xl flex-col">
+		<main className="mx-auto flex h-dvh max-w-xl flex-col">
 			<CategoryCardList className="ml-4 py-4" />
 			<div className="p-4">
 				<Separator />

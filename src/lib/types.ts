@@ -26,3 +26,10 @@ export type RGB = {
 	g: number
 	b: number
 }
+
+export type CartItem = {
+	product: Product
+	quantity: number
+}
+
+export type Cart = CartItem[]
