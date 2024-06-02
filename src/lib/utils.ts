@@ -12,7 +12,7 @@ import {
 } from 'lucide-react'
 import { twMerge } from 'tailwind-merge'
 
-import { Category, RGB } from '@/lib/types'
+import { ApplyProductFilterArgs, Category, RGB } from '@/lib/types'
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
@@ -82,4 +82,19 @@ export function lightenColor(hex: string, percent: number): string {
 	const { r, g, b } = extractRgbFromHex(formattedHex)
 
 	return `#${formatHexValue(lightenHex(r, percent))}${formatHexValue(lightenHex(g, percent))}${formatHexValue(lightenHex(b, percent))}`
+}
+
+export function applyProductFilter({
+	products,
+	categoryId,
+}: ApplyProductFilterArgs) {
+	let filteredProducts = [...products]
+
+	if (categoryId) {
+		filteredProducts = filteredProducts.filter(
+			(product) => product.categoryId === categoryId,
+		)
+	}
+
+	return filteredProducts
 }

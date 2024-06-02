@@ -1,5 +1,6 @@
 'use client'
 
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
 import { Category } from '@/lib/types'
@@ -15,21 +16,44 @@ export default function CategoryCard({
 	...props
 }: CategoryCardProps) {
 	const [isHovered, setIsHovered] = useState(false)
+	const router = useRouter()
+	const pathname = usePathname()
+	const searchParams = useSearchParams()
+
 	const Icon = getCategoryIcon(category.name)
+	const selectedCategory = searchParams.get('category')
+	const isSelectedCategory =
+		selectedCategory && selectedCategory === category.name
+
+	const handleClick = () => {
+		const urlSearchParams = new URLSearchParams(searchParams)
+
+		isSelectedCategory
+			? urlSearchParams.delete('category')
+			: urlSearchParams.set('category', category.name)
+
+		router.replace(`${pathname}?${urlSearchParams.toString()}`)
+	}
 
 	return (
 		<div
 			style={{
-				backgroundColor: isHovered
-					? lightenColor(category.color, 30)
-					: lightenColor(category.color, 50),
+				backgroundColor:
+					isSelectedCategory && isHovered
+						? 'hsl(var(--accent))'
+						: isSelectedCategory && !isHovered
+							? 'hsl(var(--background))'
+							: !isSelectedCategory && isHovered
+								? lightenColor(category.color, 30)
+								: lightenColor(category.color, 50),
 			}}
 			className={cn(
-				'flex w-[200px] items-center justify-between gap-4 rounded-xl border border-input p-4 shadow-sm transition-colors hover:text-accent-foreground',
+				'flex w-[200px] cursor-pointer items-center justify-between gap-4 rounded-xl border border-input p-4 shadow-sm transition-colors hover:text-accent-foreground',
 				className,
 			)}
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
+			onClick={handleClick}
 			{...props}
 		>
 			<span className="text-sm">{category.name}</span>

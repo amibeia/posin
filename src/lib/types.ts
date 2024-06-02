@@ -33,3 +33,8 @@ export type CartItem = {
 }
 
 export type Cart = CartItem[]
+
+export type ApplyProductFilterArgs = {
+	products: Product[]
+	categoryId: Category['id']
+}
