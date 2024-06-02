@@ -1,8 +1,10 @@
+'use client'
+
 import { Circle } from 'lucide-react'
 
-import categories from '@/data/categories.json'
 import { Product } from '@/lib/types'
 import { cn, rupiah } from '@/lib/utils'
+import { useCategories } from '@/store/category'
 
 interface ProductCardProps extends React.ComponentPropsWithoutRef<'div'> {
 	product: Product
@@ -13,6 +15,7 @@ export default function ProductCard({
 	className,
 	...props
 }: ProductCardProps) {
+	const categories = useCategories()
 	const productCategory = categories.find(
 		(category) => category.id === product.categoryId,
 	)!

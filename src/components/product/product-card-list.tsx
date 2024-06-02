@@ -1,13 +1,17 @@
+'use client'
+
 import ProductCard from '@/components/product/product-card'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
-import products from '@/data/products.json'
 import { cn } from '@/lib/utils'
+import { useProducts } from '@/store/product'
 
 interface ProductCardList
 	extends React.ComponentPropsWithoutRef<typeof ScrollArea> {}
 
 export default function ProductCardList(props: ProductCardList) {
+	const products = useProducts()
+
 	return (
 		<ScrollArea {...props}>
 			<section className="flex flex-col gap-2">
