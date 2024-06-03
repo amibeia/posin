@@ -10,6 +10,9 @@ type CartState = {
 type CartActions = {
 	actions: {
 		toggleItem: (product: Product) => void
+		decreaseItemQuantity: (id: Product['id']) => void
+		increaseItemQuantity: (id: Product['id']) => void
+		deleteItem: (id: Product['id']) => void
 	}
 }
 
@@ -36,6 +39,26 @@ const cartStore = create<CartState & CartActions>()(
 							cart: nextCart,
 						}
 					}),
+				decreaseItemQuantity: (id) =>
+					set((state) => ({
+						cart: state.cart.map((item) => {
+							return item.product.id === id && item.quantity > 1
+								? { ...item, quantity: item.quantity - 1 }
+								: item
+						}),
+					})),
+				increaseItemQuantity: (id) =>
+					set((state) => ({
+						cart: state.cart.map((item) => {
+							return item.product.id === id
+								? { ...item, quantity: item.quantity + 1 }
+								: item
+						}),
+					})),
+				deleteItem: (id) =>
+					set((state) => ({
+						cart: state.cart.filter((item) => item.product.id !== id),
+					})),
 			},
 		}),
 		{

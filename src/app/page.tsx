@@ -13,7 +13,7 @@ export default function HomePage() {
 			<Suspense fallback={<CategoryCardListSkeleton className="ml-4 py-4" />}>
 				<CategoryCardList className="ml-4 py-4" />
 			</Suspense>
-			<div className="p-4">
+			<div className="my-1 px-4">
 				<Separator />
 			</div>
 			<Suspense

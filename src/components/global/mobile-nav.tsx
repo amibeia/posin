@@ -1,6 +1,8 @@
 import { CirclePlus, ClipboardList, Home } from 'lucide-react'
 
+import CartDrawer from '@/components/cart/cart-drawer'
 import { Button } from '@/components/ui/button'
+
 import { cn } from '@/lib/utils'
 
 interface MobileNavProps extends React.ComponentPropsWithoutRef<'nav'> {}
@@ -20,6 +22,7 @@ export default function MobileNav({ className, ...props }: MobileNavProps) {
 			<Button variant="ghost" size="icon" className="hover:bg-accent/80">
 				<CirclePlus className="size-4 shrink-0" />
 			</Button>
+			<CartDrawer />
 			<Button variant="ghost" size="icon" className="hover:bg-accent/80">
 				<ClipboardList className="size-4 shrink-0" />
 			</Button>
