@@ -10,9 +10,10 @@ import {
 	Package,
 	Zap,
 } from 'lucide-react'
+import { customAlphabet } from 'nanoid'
 import { twMerge } from 'tailwind-merge'
 
-import { ApplyProductFilterArgs, Category, RGB } from '@/lib/types'
+import { ApplyProductFilterArgs, Category, NanoidArgs, RGB } from '@/lib/types'
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
@@ -97,4 +98,12 @@ export function applyProductFilter({
 	}
 
 	return filteredProducts
+}
+
+export function nanoid(
+	{ size, prefix }: NanoidArgs = { size: 10, prefix: '' },
+) {
+	const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789'
+
+	return customAlphabet(prefix ? `${prefix}-${alphabet}` : alphabet, size)()
 }

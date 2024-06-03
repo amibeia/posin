@@ -21,7 +21,7 @@ export default function HomePage() {
 			>
 				<ProductCardList className="my-4 flex-1 px-4" />
 			</Suspense>
-			<MobileNav className="fixed inset-x-0 bottom-4" />
+			<MobileNav className="fixed inset-x-0 bottom-4 z-10" />
 		</main>
 	)
 }

@@ -32,7 +32,7 @@ export default function CartItemQuantityInput({
 			<Button
 				variant="ghost"
 				size="icon"
-				className="size-6"
+				className="size-6 shrink-0"
 				onClick={() => cartActions.deleteItem(item.product.id)}
 			>
 				<Trash className="size-4 shrink-0" />
@@ -41,7 +41,7 @@ export default function CartItemQuantityInput({
 			<Button
 				variant="ghost"
 				size="icon"
-				className="size-6"
+				className="size-6 shrink-0"
 				disabled={item.quantity <= 1}
 				onClick={() => cartActions.decreaseItemQuantity(item.product.id)}
 			>
@@ -53,7 +53,7 @@ export default function CartItemQuantityInput({
 			<Button
 				variant="ghost"
 				size="icon"
-				className="size-6"
+				className="size-6 shrink-0"
 				onClick={() => cartActions.increaseItemQuantity(item.product.id)}
 			>
 				<Plus className="size-4 shrink-0" />
