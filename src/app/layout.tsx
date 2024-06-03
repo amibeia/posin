@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 
 import ClientOnly from '@/components/global/client-only'
+import MobileNav from '@/components/global/mobile-nav'
 import { Toaster } from '@/components/ui/sonner'
 
 import { cn } from '@/lib/utils'
@@ -32,6 +33,7 @@ export default function RootLayout({
 				)}
 			>
 				{children}
+				<MobileNav className="fixed inset-x-0 bottom-4 z-10" />
 				<ClientOnly>
 					<Toaster />
 				</ClientOnly>

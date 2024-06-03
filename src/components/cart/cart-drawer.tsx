@@ -1,7 +1,7 @@
 'use client'
 
 import { ArrowDown, ShoppingCart } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 import CartItemCardList from '@/components/cart/cart-item-card-list'
@@ -17,7 +17,7 @@ import {
 	DrawerTrigger,
 } from '@/components/ui/drawer'
 
-import { rupiah } from '@/lib/utils'
+import { getOrderTotal, rupiah } from '@/lib/utils'
 import { useCart, useCartActions } from '@/store/cart'
 import { useOrderActions } from '@/store/order'
 
@@ -28,19 +28,20 @@ export default function CartDrawer() {
 	const orderActions = useOrderActions()
 
 	const totalItems = cart.length
-	const total = cart.reduce(
-		(value, item) => item.product.price * item.quantity + value,
-		0,
-	)
+	const total = getOrderTotal(cart)
+
+	useEffect(() => {
+		if (totalItems === 0) {
+			setOpen(false)
+		}
+	}, [totalItems])
 
 	const handleCheckoutClick = () => {
-		orderActions.addOrder({ cart })
+		orderActions.addOrder({ items: cart })
 		cartActions.reset()
 		toast.info(
 			'Your order has been placed successfully! Thank you for shopping with us.',
 		)
-
-		setOpen(false)
 	}
 
 	return (
@@ -63,9 +64,7 @@ export default function CartDrawer() {
 				<DrawerHeader>
 					<DrawerTitle>
 						<span>Your Shopping Cart</span>
-						{totalItems !== 0 && (
-							<span className="ml-2 text-base">({totalItems})</span>
-						)}
+						<span className="ml-2 text-base">({totalItems})</span>
 					</DrawerTitle>
 					<DrawerDescription>
 						Check your cart for all selected products and the overall price.
@@ -74,12 +73,10 @@ export default function CartDrawer() {
 				</DrawerHeader>
 				<CartItemCardList cart={cart} className="my-4 flex-1 px-4" />
 				<DrawerFooter className="gap-4 bg-accent">
-					{totalItems !== 0 && (
-						<div className="flex items-center justify-between">
-							<span className="text-base">Total</span>
-							<span className="text-base font-bold">{rupiah(total)}</span>
-						</div>
-					)}
+					<div className="flex items-center justify-between">
+						<span className="text-base">Total</span>
+						<span className="text-base font-bold">{rupiah(total)}</span>
+					</div>
 					<div className="flex items-center gap-2">
 						<DrawerClose asChild>
 							<Button

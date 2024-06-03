@@ -36,7 +36,7 @@ export type Cart = CartItem[]
 
 export type Order = {
 	id: string
-	cart: Cart
+	items: CartItem[]
 	createdAt: Date
 	updatedAt: Date
 }
@@ -46,7 +46,7 @@ export type ApplyProductFilterArgs = {
 	categoryId: Category['id']
 }
 
-export type AddOrderArgs = Pick<Order, 'cart'>
+export type AddOrderArgs = Pick<Order, 'items'>
 export type NanoidArgs = {
 	size?: number
 	prefix?: string

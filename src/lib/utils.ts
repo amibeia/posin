@@ -13,13 +13,20 @@ import {
 import { customAlphabet } from 'nanoid'
 import { twMerge } from 'tailwind-merge'
 
-import { ApplyProductFilterArgs, Category, NanoidArgs, RGB } from '@/lib/types'
+import {
+	ApplyProductFilterArgs,
+	CartItem,
+	Category,
+	NanoidArgs,
+	Product,
+	RGB,
+} from '@/lib/types'
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
 }
 
-export function rupiah(value: number) {
+export function rupiah(value: number): string {
 	return new Intl.NumberFormat('id-ID', {
 		style: 'currency',
 		currency: 'IDR',
@@ -88,7 +95,7 @@ export function lightenColor(hex: string, percent: number): string {
 export function applyProductFilter({
 	products,
 	categoryId,
-}: ApplyProductFilterArgs) {
+}: ApplyProductFilterArgs): Product[] {
 	let filteredProducts = [...products]
 
 	if (categoryId) {
@@ -101,9 +108,18 @@ export function applyProductFilter({
 }
 
 export function nanoid(
-	{ size, prefix }: NanoidArgs = { size: 10, prefix: '' },
-) {
-	const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789'
+	{ size = 10, prefix }: NanoidArgs = { size: 10 },
+): string {
+	const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
-	return customAlphabet(prefix ? `${prefix}-${alphabet}` : alphabet, size)()
+	return prefix && prefix.length !== 0
+		? `${prefix}-${customAlphabet(alphabet, size)()}`
+		: customAlphabet(alphabet, size)()
+}
+
+export function getOrderTotal(items: CartItem[]): number {
+	return items.reduce(
+		(value, item) => item.product.price * item.quantity + value,
+		0,
+	)
 }

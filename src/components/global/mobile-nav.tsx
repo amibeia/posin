@@ -1,9 +1,10 @@
 import { CirclePlus, ClipboardList, Home } from 'lucide-react'
 
 import CartDrawer from '@/components/cart/cart-drawer'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 
 import { cn } from '@/lib/utils'
+import Link from 'next/link'
 
 interface MobileNavProps extends React.ComponentPropsWithoutRef<'nav'> {}
 
@@ -16,13 +17,15 @@ export default function MobileNav({ className, ...props }: MobileNavProps) {
 			)}
 			{...props}
 		>
-			<Button
-				variant="ghost"
-				size="icon"
-				className="shrink-0 hover:bg-accent/80"
+			<Link
+				href="/"
+				className={cn(
+					buttonVariants({ variant: 'ghost', size: 'icon' }),
+					'shrink-0 hover:bg-accent/80',
+				)}
 			>
 				<Home className="size-4 shrink-0" />
-			</Button>
+			</Link>
 			<Button
 				variant="ghost"
 				size="icon"
@@ -31,13 +34,15 @@ export default function MobileNav({ className, ...props }: MobileNavProps) {
 				<CirclePlus className="size-4 shrink-0" />
 			</Button>
 			<CartDrawer />
-			<Button
-				variant="ghost"
-				size="icon"
-				className="shrink-0 hover:bg-accent/80"
+			<Link
+				href="/orders"
+				className={cn(
+					buttonVariants({ variant: 'ghost', size: 'icon' }),
+					'shrink-0 hover:bg-accent/80',
+				)}
 			>
 				<ClipboardList className="size-4 shrink-0" />
-			</Button>
+			</Link>
 		</nav>
 	)
 }

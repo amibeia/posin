@@ -1,7 +1,6 @@
 import { Suspense } from 'react'
 
 import CategoryCardList from '@/components/category/category-card-list'
-import MobileNav from '@/components/global/mobile-nav'
 import ProductCardList from '@/components/product/product-card-list'
 import CategoryCardListSkeleton from '@/components/skeleton/category-card-list-skeleton'
 import ProductCardListSkeleton from '@/components/skeleton/product-card-list-skeleton'
@@ -21,7 +20,6 @@ export default function HomePage() {
 			>
 				<ProductCardList className="my-4 flex-1 px-4" />
 			</Suspense>
-			<MobileNav className="fixed inset-x-0 bottom-4 z-10" />
 		</main>
 	)
 }
