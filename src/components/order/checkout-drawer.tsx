@@ -16,6 +16,7 @@ import {
 	DrawerTitle,
 	DrawerTrigger,
 } from '@/components/ui/drawer'
+import { Switch } from '@/components/ui/switch'
 
 import { useCart, useCartActions } from '@/store/cart'
 import { useOrder, useOrderActions } from '@/store/order'
@@ -30,7 +31,7 @@ export default function CheckoutDrawer() {
 	const totalItems = cart.length
 
 	const handleCreateOrderClick = () => {
-		orderActions.addOrder({ items: cart, paymentMethod: order.paymentMethod })
+		orderActions.addOrder({ items: cart })
 		orderActions.reset()
 		cartActions.reset()
 		toast.info(
@@ -62,9 +63,23 @@ export default function CheckoutDrawer() {
 						correct. Proceed when everything looks good.
 					</DrawerDescription>
 				</DrawerHeader>
-				<section className="flex flex-col gap-1 p-4">
-					<p className="text-sm">Payment Method</p>
-					<PaymentMethodOptionList />
+				<section className="flex flex-col gap-4 p-4">
+					<section className="flex flex-col gap-1">
+						<div className="flex items-center justify-between">
+							<p className="text-sm">Ship this order</p>
+							<Switch
+								checked={order.isNeedShipped}
+								onCheckedChange={() => orderActions.toggleNeedShipped()}
+							/>
+						</div>
+						<span className="pr-[40px] text-xs text-muted-foreground">
+							If you want this order to be shipped, enable this option.
+						</span>
+					</section>
+					<section className="flex flex-col gap-1">
+						<p className="text-sm">Payment method</p>
+						<PaymentMethodOptionList />
+					</section>
 				</section>
 				<DrawerFooter className="flex-row bg-accent">
 					<DrawerClose asChild>

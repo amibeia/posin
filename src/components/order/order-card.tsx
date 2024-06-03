@@ -4,11 +4,13 @@ import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 
 import CategoryBadgeList from '@/components/category/category-badge-list'
+import OrderIcons from '@/components/order/order-icons'
 import OrderTable from '@/components/order/order-table'
+import { Button } from '@/components/ui/button'
 
-import { PAYMENT_METHOD_OPTIONS } from '@/lib/constants'
 import { Order } from '@/lib/types'
 import { cn } from '@/lib/utils'
+import { useOrderActions } from '@/store/order'
 
 dayjs.extend(localizedFormat)
 
@@ -21,27 +23,32 @@ export default function OrderCard({
 	className,
 	...props
 }: OrderCardProps) {
-	const PaymentMethodIcon = PAYMENT_METHOD_OPTIONS.find(
-		(option) => option.id === order.paymentMethod,
-	)!.icon
+	const orderActions = useOrderActions()
 
 	return (
 		<div
 			className={cn(
-				'flex flex-col gap-2 rounded-xl border border-input bg-background p-4 shadow-sm',
+				'flex flex-col gap-4 rounded-xl border border-input bg-background p-4 shadow-sm',
 				className,
 			)}
 			{...props}
 		>
-			<section className="flex flex-col gap-1">
-				<div className="flex items-center justify-between">
-					<span className="text-sm font-bold">{order.id}</span>
-					<PaymentMethodIcon className="size-4 shrink-0" />
+			<section className="flex flex-col gap-2">
+				<div className="flex flex-col gap-1">
+					<div className="flex items-center justify-between">
+						<span className="text-sm font-bold">{order.id}</span>
+						<OrderIcons order={order} />
+					</div>
+					<span className="text-sm">
+						{dayjs(order.createdAt).format('lll')}
+					</span>
 				</div>
-				<span className="text-sm">{dayjs(order.createdAt).format('lll')}</span>
+				<CategoryBadgeList items={order.items} />
 			</section>
-			<CategoryBadgeList items={order.items} />
 			<OrderTable order={order} />
+			{order.isNeedShipped && !order.hasShipped && (
+				<Button onClick={() => orderActions.shipOrder(order.id)}>Ship</Button>
+			)}
 		</div>
 	)
 }

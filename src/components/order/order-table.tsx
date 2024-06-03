@@ -34,7 +34,7 @@ export default function OrderTable({ order, ...props }: OrderTableProps) {
 							{item.quantity}
 						</TableCell>
 						<TableCell>{item.product.name}</TableCell>
-						<TableCell className="w-[120px] text-right font-bold">
+						<TableCell className="w-[120px] text-right font-semibold">
 							{rupiah(item.product.price)}
 						</TableCell>
 					</TableRow>

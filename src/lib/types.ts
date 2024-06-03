@@ -40,6 +40,8 @@ export type PaymentMethod = 'cash' | 'credit-card' | 'e-wallet'
 export type Order = {
 	id: string
 	items: CartItem[]
+	isNeedShipped: boolean
+	hasShipped: boolean
 	paymentMethod: PaymentMethod
 	createdAt: Date
 	updatedAt: Date
@@ -56,7 +58,7 @@ export type ApplyProductFilterArgs = {
 	categoryId: Category['id']
 }
 
-export type AddOrderArgs = Pick<Order, 'items' | 'paymentMethod'>
+export type AddOrderArgs = Pick<Order, 'items'>
 export type NanoidArgs = {
 	size?: number
 	prefix?: string
