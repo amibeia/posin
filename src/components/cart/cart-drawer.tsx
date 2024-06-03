@@ -2,9 +2,9 @@
 
 import { ArrowDown, ShoppingCart } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { toast } from 'sonner'
 
 import CartItemCardList from '@/components/cart/cart-item-card-list'
+import CheckoutDrawer from '@/components/order/checkout-drawer'
 import { Button } from '@/components/ui/button'
 import {
 	Drawer,
@@ -18,14 +18,11 @@ import {
 } from '@/components/ui/drawer'
 
 import { getOrderTotal, rupiah } from '@/lib/utils'
-import { useCart, useCartActions } from '@/store/cart'
-import { useOrderActions } from '@/store/order'
+import { useCart } from '@/store/cart'
 
 export default function CartDrawer() {
 	const [open, setOpen] = useState(false)
 	const cart = useCart()
-	const cartActions = useCartActions()
-	const orderActions = useOrderActions()
 
 	const totalItems = cart.length
 	const total = getOrderTotal(cart)
@@ -35,14 +32,6 @@ export default function CartDrawer() {
 			setOpen(false)
 		}
 	}, [totalItems])
-
-	const handleCheckoutClick = () => {
-		orderActions.addOrder({ items: cart })
-		cartActions.reset()
-		toast.info(
-			'Your order has been placed successfully! Thank you for shopping with us.',
-		)
-	}
 
 	return (
 		<Drawer open={open} onOpenChange={setOpen} dismissible={false}>
@@ -87,14 +76,7 @@ export default function CartDrawer() {
 								<ArrowDown className="size-4 shrink-0" />
 							</Button>
 						</DrawerClose>
-						<Button
-							size="lg"
-							className="w-full rounded-full"
-							disabled={cart.length === 0}
-							onClick={handleCheckoutClick}
-						>
-							Checkout
-						</Button>
+						<CheckoutDrawer />
 					</div>
 				</DrawerFooter>
 			</DrawerContent>

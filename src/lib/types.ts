@@ -1,3 +1,5 @@
+import { LucideIcon } from 'lucide-react'
+
 export type CategoryName =
 	| 'Flooring Materials'
 	| 'Fasteners and Hardware'
@@ -33,12 +35,20 @@ export type CartItem = {
 }
 
 export type Cart = CartItem[]
+export type PaymentMethod = 'cash' | 'credit-card' | 'e-wallet'
 
 export type Order = {
 	id: string
 	items: CartItem[]
+	paymentMethod: PaymentMethod
 	createdAt: Date
 	updatedAt: Date
+}
+
+export type PaymentMethodOption = {
+	id: PaymentMethod
+	label: string
+	icon: LucideIcon
 }
 
 export type ApplyProductFilterArgs = {
@@ -46,7 +56,7 @@ export type ApplyProductFilterArgs = {
 	categoryId: Category['id']
 }
 
-export type AddOrderArgs = Pick<Order, 'items'>
+export type AddOrderArgs = Pick<Order, 'items' | 'paymentMethod'>
 export type NanoidArgs = {
 	size?: number
 	prefix?: string

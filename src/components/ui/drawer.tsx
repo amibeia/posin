@@ -16,6 +16,11 @@ const Drawer = ({
 )
 Drawer.displayName = 'Drawer'
 
+const DrawerNested = (
+	props: React.ComponentProps<typeof DrawerPrimitive.NestedRoot>,
+) => <DrawerPrimitive.NestedRoot {...props} />
+DrawerNested.displayName = 'DrawerNested'
+
 const DrawerTrigger = DrawerPrimitive.Trigger
 
 const DrawerPortal = DrawerPrimitive.Portal
@@ -111,6 +116,7 @@ export {
 	DrawerDescription,
 	DrawerFooter,
 	DrawerHeader,
+	DrawerNested,
 	DrawerOverlay,
 	DrawerPortal,
 	DrawerTitle,

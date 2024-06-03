@@ -6,6 +6,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat'
 import CategoryBadgeList from '@/components/category/category-badge-list'
 import OrderTable from '@/components/order/order-table'
 
+import { PAYMENT_METHOD_OPTIONS } from '@/lib/constants'
 import { Order } from '@/lib/types'
 import { cn } from '@/lib/utils'
 
@@ -20,6 +21,10 @@ export default function OrderCard({
 	className,
 	...props
 }: OrderCardProps) {
+	const PaymentMethodIcon = PAYMENT_METHOD_OPTIONS.find(
+		(option) => option.id === order.paymentMethod,
+	)!.icon
+
 	return (
 		<div
 			className={cn(
@@ -31,6 +36,7 @@ export default function OrderCard({
 			<section className="flex flex-col gap-1">
 				<div className="flex items-center justify-between">
 					<span className="text-sm font-bold">{order.id}</span>
+					<PaymentMethodIcon className="size-4 shrink-0" />
 				</div>
 				<span className="text-sm">{dayjs(order.createdAt).format('lll')}</span>
 			</section>
