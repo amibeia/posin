@@ -1,17 +1,26 @@
+import { Suspense } from 'react'
+
 import CategoryCardList from '@/components/category/category-card-list'
 import MobileNav from '@/components/global/mobile-nav'
-
 import ProductCardList from '@/components/product/product-card-list'
+import CategoryCardListSkeleton from '@/components/skeleton/category-card-list-skeleton'
+import ProductCardListSkeleton from '@/components/skeleton/product-card-list-skeleton'
 import { Separator } from '@/components/ui/separator'
 
 export default function HomePage() {
 	return (
 		<main className="mx-auto flex h-dvh max-w-xl flex-col">
-			<CategoryCardList className="ml-4 py-4" />
+			<Suspense fallback={<CategoryCardListSkeleton className="ml-4 py-4" />}>
+				<CategoryCardList className="ml-4 py-4" />
+			</Suspense>
 			<div className="p-4">
 				<Separator />
 			</div>
-			<ProductCardList className="my-4 flex-1 px-4" />
+			<Suspense
+				fallback={<ProductCardListSkeleton className="my-4 flex-1 px-4" />}
+			>
+				<ProductCardList className="my-4 flex-1 px-4" />
+			</Suspense>
 			<MobileNav className="fixed inset-x-0 bottom-4" />
 		</main>
 	)
