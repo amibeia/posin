@@ -28,7 +28,7 @@ export default function AddProductDrawer() {
 					<CirclePlus className="size-4 shrink-0" />
 				</Button>
 			</DrawerTrigger>
-			<DrawerContent className="mx-auto max-w-xl">
+			<DrawerContent className="mx-auto h-[70dvh] max-w-xl">
 				<DrawerHeader>
 					<DrawerTitle>Add New Product</DrawerTitle>
 					<DrawerDescription>

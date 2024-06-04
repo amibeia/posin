@@ -70,11 +70,11 @@ export default function AddProductForm() {
 								<FormLabel className="sr-only">Name</FormLabel>
 								<FormControl>
 									<Input
+										{...field}
 										type="text"
 										autoFocus
 										autoComplete="off"
 										placeholder="Product name"
-										{...field}
 									/>
 								</FormControl>
 							</FormItem>
@@ -93,10 +93,11 @@ export default function AddProductForm() {
 										</span>
 										<FormControl>
 											<Input
+												{...field}
 												type="number"
 												autoComplete="off"
+												value={Number(field.value).toString()}
 												className="w-[100px]"
-												{...field}
 											/>
 										</FormControl>
 									</div>
