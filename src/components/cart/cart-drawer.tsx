@@ -16,6 +16,7 @@ import {
 	DrawerTitle,
 	DrawerTrigger,
 } from '@/components/ui/drawer'
+import { Separator } from '@/components/ui/separator'
 
 import { getOrderTotal, rupiah } from '@/lib/utils'
 import { useCart } from '@/store/cart'
@@ -61,7 +62,8 @@ export default function CartDrawer() {
 					</DrawerDescription>
 				</DrawerHeader>
 				<CartItemCardList cart={cart} className="my-4 flex-1 px-4" />
-				<DrawerFooter className="gap-4 bg-accent">
+				<Separator />
+				<DrawerFooter className="gap-4">
 					<div className="flex items-center justify-between">
 						<span className="text-base">Total</span>
 						<span className="text-base font-bold">{rupiah(total)}</span>

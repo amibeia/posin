@@ -15,3 +15,14 @@ export const PAYMENT_METHOD_OPTIONS: PaymentMethodOption[] = [
 	{ id: 'credit-card', label: 'Credit Card', icon: CreditCard },
 	{ id: 'e-wallet', label: 'E-Wallet', icon: QrCode },
 ]
+
+export const CATEGORY_NAMES = [
+	'Adhesives',
+	'Concrete and Masonry',
+	'Construction Tools',
+	'Electrical Supplies',
+	'Fasteners and Hardware',
+	'Flooring Materials',
+	'Painting Supplies',
+	'Plumbing Materials',
+] as const

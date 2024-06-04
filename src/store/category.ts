@@ -9,10 +9,12 @@ type CategoryState = {
 }
 
 const initialState: CategoryState = {
-	categories: categories.map((category) => ({
-		...category,
-		name: category.name as CategoryName,
-	})),
+	categories: categories
+		.sort((a, b) => (a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1))
+		.map((category) => ({
+			...category,
+			name: category.name as CategoryName,
+		})),
 }
 
 const categoryStore = create<CategoryState>()(

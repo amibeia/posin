@@ -38,6 +38,9 @@ export default function CategoryCard({
 	return (
 		<div
 			style={{
+				color: isHovered
+					? 'hsl(var(--accent-foreground))'
+					: 'hsl(var(--foreground))',
 				backgroundColor:
 					isSelectedCategory && isHovered
 						? 'hsl(var(--accent))'
@@ -48,7 +51,7 @@ export default function CategoryCard({
 								: lightenColor(category.color, 50),
 			}}
 			className={cn(
-				'flex w-[200px] cursor-pointer items-center justify-between gap-4 rounded-xl border border-input p-4 shadow-sm transition-colors hover:text-accent-foreground',
+				'flex w-[200px] cursor-pointer items-center justify-between gap-4 rounded-xl border border-input p-4 shadow-sm transition-colors',
 				className,
 			)}
 			onMouseEnter={() => setIsHovered(true)}

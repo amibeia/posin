@@ -1,14 +1,8 @@
 import { LucideIcon } from 'lucide-react'
 
-export type CategoryName =
-	| 'Flooring Materials'
-	| 'Fasteners and Hardware'
-	| 'Electrical Supplies'
-	| 'Concrete and Masonry'
-	| 'Painting Supplies'
-	| 'Plumbing Materials'
-	| 'Construction Tools'
-	| 'Adhesives'
+import { CATEGORY_NAMES } from '@/lib/constants'
+
+export type CategoryName = (typeof CATEGORY_NAMES)[number]
 
 export type Category = {
 	id: string
@@ -63,3 +57,5 @@ export type NanoidArgs = {
 	size?: number
 	prefix?: string
 }
+
+export type AddProductArgs = Omit<Product, 'id'>

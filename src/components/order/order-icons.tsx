@@ -24,11 +24,11 @@ export default function OrderIcons({ order }: OrderIconsProps) {
 				<Briefcase {...iconStyle} />
 			)}
 
-			{order.isNeedShipped && order.hasShipped ? (
-				<CircleCheck {...iconStyle} />
-			) : order.isNeedShipped && !order.hasShipped ? (
+			{order.isNeedShipped && !order.hasShipped ? (
 				<CircleX {...iconStyle} />
-			) : null}
+			) : (
+				<CircleCheck {...iconStyle} />
+			)}
 		</section>
 	)
 }

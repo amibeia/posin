@@ -16,6 +16,8 @@ import {
 	DrawerTitle,
 	DrawerTrigger,
 } from '@/components/ui/drawer'
+import { Label } from '@/components/ui/label'
+import { Separator } from '@/components/ui/separator'
 import { Switch } from '@/components/ui/switch'
 
 import { useCart, useCartActions } from '@/store/cart'
@@ -63,11 +65,12 @@ export default function CheckoutDrawer() {
 						correct. Proceed when everything looks good.
 					</DrawerDescription>
 				</DrawerHeader>
-				<section className="flex flex-col gap-4 p-4">
-					<section className="flex flex-col gap-1">
+				<section className="flex flex-1 flex-col gap-4 p-4">
+					<section className="flex flex-col gap-2">
 						<div className="flex items-center justify-between">
-							<p className="text-sm">Ship this order</p>
+							<Label htmlFor="order-switch">Ship this order</Label>
 							<Switch
+								id="order-switch"
 								checked={order.isNeedShipped}
 								onCheckedChange={() => orderActions.toggleNeedShipped()}
 							/>
@@ -76,12 +79,13 @@ export default function CheckoutDrawer() {
 							If you want this order to be shipped, enable this option.
 						</span>
 					</section>
-					<section className="flex flex-col gap-1">
-						<p className="text-sm">Payment method</p>
+					<section className="flex flex-col gap-2">
+						<Label htmlFor="payment-method-select">Payment method</Label>
 						<PaymentMethodOptionList />
 					</section>
 				</section>
-				<DrawerFooter className="flex-row bg-accent">
+				<Separator />
+				<DrawerFooter className="flex-row">
 					<DrawerClose asChild>
 						<Button
 							variant="outline"

@@ -9,12 +9,12 @@ type ToasterProps = React.ComponentProps<typeof Sonner>
 
 const Toaster = ({ ...props }: ToasterProps) => {
 	const { theme = 'system' } = useTheme()
-	const { isSmallDevice } = useDevices()
+	const { isLargeDevice } = useDevices()
 
 	return (
 		<Sonner
 			theme={theme as ToasterProps['theme']}
-			position={isSmallDevice ? 'top-center' : 'bottom-right'}
+			position={isLargeDevice ? 'bottom-right' : 'top-center'}
 			className="toaster group"
 			toastOptions={{
 				classNames: {
