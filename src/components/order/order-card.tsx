@@ -46,7 +46,7 @@ export default function OrderCard({
 				<CategoryBadgeList items={order.items} />
 			</section>
 			<OrderTable order={order} />
-			{order.isNeedShipped && !order.hasShipped && (
+			{order.transportationMethod && !order.hasShipped && (
 				<Button onClick={() => orderActions.shipOrder(order.id)}>Ship</Button>
 			)}
 		</div>

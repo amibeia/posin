@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowDown } from 'lucide-react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 import SelectCategoryDrawer from '@/components/category/select-category-drawer'
@@ -50,6 +51,8 @@ export default function AddProductForm() {
 		)!
 
 		productActions.addProduct({ name, price, categoryId: selectedCategory.id })
+
+		toast.info('Your new product has been placed successfully!')
 
 		form.setFocus('name', { shouldSelect: true })
 		form.reset()
@@ -111,7 +114,7 @@ export default function AddProductForm() {
 								<FormItem className="space-y-0">
 									<FormLabel className="sr-only">Category</FormLabel>
 									<FormControl>
-										<SelectCategoryDrawer />
+										<SelectCategoryDrawer {...field} />
 									</FormControl>
 								</FormItem>
 							)}

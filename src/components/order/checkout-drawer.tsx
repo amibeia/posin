@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 
 import PaymentMethodOptionList from '@/components/order/payment-method-option-list'
+import TransportationMethodOptionList from '@/components/order/transportation-method-option-list'
 import { Button } from '@/components/ui/button'
 import {
 	DrawerClose,
@@ -36,6 +37,7 @@ export default function CheckoutDrawer() {
 		orderActions.addOrder({ items: cart })
 		orderActions.reset()
 		cartActions.reset()
+
 		toast.info(
 			'Your order has been placed successfully! Thank you for shopping with us.',
 		)
@@ -65,20 +67,30 @@ export default function CheckoutDrawer() {
 						correct. Proceed when everything looks good.
 					</DrawerDescription>
 				</DrawerHeader>
-				<section className="flex flex-1 flex-col gap-4 p-4">
-					<section className="flex flex-col gap-2">
-						<div className="flex items-center justify-between">
-							<Label htmlFor="order-switch">Ship this order</Label>
-							<Switch
-								id="order-switch"
-								checked={order.isNeedShipped}
-								onCheckedChange={() => orderActions.toggleNeedShipped()}
-							/>
-						</div>
-						<span className="pr-[40px] text-xs text-muted-foreground">
-							If you want this order to be shipped, enable this option.
-						</span>
-					</section>
+				<section className="flex flex-1 flex-col justify-between p-4">
+					<div className="flex flex-1 flex-col gap-4">
+						<section className="flex flex-col gap-1">
+							<div className="flex items-center justify-between">
+								<Label htmlFor="order-switch">Ship this order</Label>
+								<Switch
+									id="order-switch"
+									checked={order.isNeedShipped}
+									onCheckedChange={() => orderActions.toggleNeedShipped()}
+								/>
+							</div>
+							<span className="pr-[40px] text-xs text-muted-foreground">
+								If you want this order to be shipped, enable this option.
+							</span>
+						</section>
+						{order.isNeedShipped && (
+							<section className="flex flex-col gap-2">
+								<Label htmlFor="transportation-method-select">
+									Transportation method
+								</Label>
+								<TransportationMethodOptionList />
+							</section>
+						)}
+					</div>
 					<section className="flex flex-col gap-2">
 						<Label htmlFor="payment-method-select">Payment method</Label>
 						<PaymentMethodOptionList />

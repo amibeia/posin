@@ -2,23 +2,33 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 
 import {
-	DEFAULT_HAS_SHIPPED,
 	DEFAULT_IS_NEED_SHIPPED,
 	DEFAULT_PAYMENT_METHOD,
+	DEFAULT_TRANSPORTATION_METHOD,
 	PREFIX_ORDER_ID,
 } from '@/lib/constants'
-import { AddOrderArgs, Order, PaymentMethod } from '@/lib/types'
+import {
+	AddOrderArgs,
+	Order,
+	PaymentMethod,
+	TransportationMethod,
+} from '@/lib/types'
 import { nanoid } from '@/lib/utils'
 
 type OrderState = {
 	orders: Order[]
-	order: Pick<Order, 'isNeedShipped' | 'paymentMethod'>
+	order: Pick<Order, 'transportationMethod' | 'paymentMethod'> & {
+		isNeedShipped: boolean
+	}
 }
 
 type OrderActions = {
 	actions: {
 		addOrder: (args: AddOrderArgs) => void
 		changePaymentMethod: (paymentMethod: PaymentMethod) => void
+		changeTransportationMethod: (
+			transportationMethod: TransportationMethod,
+		) => void
 		toggleNeedShipped: () => void
 		shipOrder: (id: Order['id']) => void
 		reset: () => void
@@ -29,6 +39,7 @@ const initialState: OrderState = {
 	orders: [],
 	order: {
 		isNeedShipped: DEFAULT_IS_NEED_SHIPPED,
+		transportationMethod: null,
 		paymentMethod: DEFAULT_PAYMENT_METHOD,
 	},
 }
@@ -45,8 +56,8 @@ const orderStore = create<OrderState & OrderActions>()(
 							{
 								id: nanoid({ prefix: PREFIX_ORDER_ID }),
 								items,
-								isNeedShipped: state.order.isNeedShipped,
-								hasShipped: DEFAULT_HAS_SHIPPED,
+								hasShipped: state.order.isNeedShipped ? false : true,
+								transportationMethod: state.order.transportationMethod,
 								paymentMethod: state.order.paymentMethod,
 								createdAt: new Date(),
 								updatedAt: new Date(),
@@ -55,13 +66,22 @@ const orderStore = create<OrderState & OrderActions>()(
 					})),
 				changePaymentMethod: (paymentMethod) =>
 					set((state) => ({ order: { ...state.order, paymentMethod } })),
+				changeTransportationMethod: (transportationMethod) =>
+					set((state) => ({ order: { ...state.order, transportationMethod } })),
 				toggleNeedShipped: () =>
-					set((state) => ({
-						order: {
-							...state.order,
-							isNeedShipped: !state.order.isNeedShipped,
-						},
-					})),
+					set((state) => {
+						const nextIsNeedShipped = !state.order.isNeedShipped
+
+						return {
+							order: {
+								...state.order,
+								isNeedShipped: nextIsNeedShipped,
+								transportationMethod: nextIsNeedShipped
+									? DEFAULT_TRANSPORTATION_METHOD
+									: null,
+							},
+						}
+					}),
 				shipOrder: (id) =>
 					set((state) => ({
 						orders: state.orders.map((order) => {

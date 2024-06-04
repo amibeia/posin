@@ -6,6 +6,7 @@ import AddProductDrawer from '@/components/product/add-product-drawer'
 import { buttonVariants } from '@/components/ui/button'
 
 import { cn } from '@/lib/utils'
+import { Separator } from '../ui/separator'
 
 interface MobileNavProps extends React.ComponentPropsWithoutRef<'nav'> {}
 
@@ -27,8 +28,6 @@ export default function MobileNav({ className, ...props }: MobileNavProps) {
 			>
 				<Store className="size-4 shrink-0" />
 			</Link>
-			<AddProductDrawer />
-			<CartDrawer />
 			<Link
 				href="/orders"
 				className={cn(
@@ -38,6 +37,9 @@ export default function MobileNav({ className, ...props }: MobileNavProps) {
 			>
 				<ClipboardList className="size-4 shrink-0" />
 			</Link>
+			<Separator orientation="vertical" className="mx-1 h-6" />
+			<AddProductDrawer />
+			<CartDrawer />
 		</nav>
 	)
 }

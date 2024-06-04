@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 
-import { Cart, Product } from '@/lib/types'
+import { Cart, CartItem, Product } from '@/lib/types'
 
 type CartState = {
 	cart: Cart
@@ -12,6 +12,10 @@ type CartActions = {
 		toggleItem: (product: Product) => void
 		decreaseItemQuantity: (id: Product['id']) => void
 		increaseItemQuantity: (id: Product['id']) => void
+		changeItemQuantity: (
+			id: Product['id'],
+			quantity: CartItem['quantity'],
+		) => void
 		deleteItem: (id: Product['id']) => void
 		reset: () => void
 	}
@@ -54,6 +58,12 @@ const cartStore = create<CartState & CartActions>()(
 							return item.product.id === id
 								? { ...item, quantity: item.quantity + 1 }
 								: item
+						}),
+					})),
+				changeItemQuantity: (id, quantity) =>
+					set((state) => ({
+						cart: state.cart.map((item) => {
+							return item.product.id === id ? { ...item, quantity } : item
 						}),
 					})),
 				deleteItem: (id) =>
