@@ -107,7 +107,7 @@ export default function AddProductForm() {
 						<FormField
 							control={form.control}
 							name="categoryName"
-							render={() => (
+							render={({ field }) => (
 								<FormItem className="space-y-0">
 									<FormLabel className="sr-only">Category</FormLabel>
 									<FormControl>
