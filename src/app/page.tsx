@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 
 import CategoryCardList from '@/components/category/category-card-list'
 import ProductCardList from '@/components/product/product-card-list'
+import ProductSearch from '@/components/product/product-search'
 import CategoryCardListSkeleton from '@/components/skeleton/category-card-list-skeleton'
 import ProductCardListSkeleton from '@/components/skeleton/product-card-list-skeleton'
 import { Separator } from '@/components/ui/separator'
@@ -9,6 +10,9 @@ import { Separator } from '@/components/ui/separator'
 export default function HomePage() {
 	return (
 		<main className="mx-auto flex h-dvh max-w-xl flex-col">
+			<section className="p-4 pb-0">
+				<ProductSearch />
+			</section>
 			<Suspense fallback={<CategoryCardListSkeleton className="ml-4 py-4" />}>
 				<CategoryCardList className="ml-4 py-4" />
 			</Suspense>

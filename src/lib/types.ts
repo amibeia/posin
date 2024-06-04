@@ -58,6 +58,7 @@ export type RGB = {
 
 export type ApplyProductFilterArgs = {
 	products: Product[]
+	query: string
 	categoryId: Category['id']
 }
 export type AddProductArgs = Omit<Product, 'id'>

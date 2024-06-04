@@ -18,6 +18,7 @@ export default function ProductCardList(props: ProductCardList) {
 	const categories = useCategories()
 	const searchParams = useSearchParams()
 
+	const query = searchParams.get('query') || ''
 	const selectedCategoryName = searchParams.get('category')
 	const selectedCategory = categories.find(
 		(category) => category.name === selectedCategoryName,
@@ -25,6 +26,7 @@ export default function ProductCardList(props: ProductCardList) {
 
 	const filteredProducts = applyProductFilter({
 		products,
+		query,
 		categoryId: selectedCategory ? selectedCategory.id : '',
 	})
 

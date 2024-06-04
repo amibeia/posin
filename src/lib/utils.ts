@@ -94,9 +94,16 @@ export function lightenColor(hex: string, percent: number): string {
 
 export function applyProductFilter({
 	products,
+	query,
 	categoryId,
 }: ApplyProductFilterArgs): Product[] {
 	let filteredProducts = [...products]
+
+	if (query) {
+		filteredProducts = filteredProducts.filter((product) =>
+			product.name.toLowerCase().includes(query.toLowerCase()),
+		)
+	}
 
 	if (categoryId) {
 		filteredProducts = filteredProducts.filter(
