@@ -1,16 +1,26 @@
-import { ClipboardList, Store } from 'lucide-react'
+'use client'
+
+import { ClipboardList, LucideIcon, Store } from 'lucide-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 import CartDrawer from '@/components/cart/cart-drawer'
 import AddProductDrawer from '@/components/product/add-product-drawer'
 import { buttonVariants } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
 
 import { cn } from '@/lib/utils'
-import { Separator } from '../ui/separator'
 
 interface MobileNavProps extends React.ComponentPropsWithoutRef<'nav'> {}
 
+const links: { href: string; icon: LucideIcon }[] = [
+	{ href: '/', icon: Store },
+	{ href: '/orders', icon: ClipboardList },
+]
+
 export default function MobileNav({ className, ...props }: MobileNavProps) {
+	const pathname = usePathname()
+
 	return (
 		<nav
 			className={cn(
@@ -19,24 +29,27 @@ export default function MobileNav({ className, ...props }: MobileNavProps) {
 			)}
 			{...props}
 		>
-			<Link
-				href="/"
-				className={cn(
-					buttonVariants({ variant: 'ghost', size: 'icon' }),
-					'shrink-0 hover:bg-accent/80',
-				)}
-			>
-				<Store className="size-4 shrink-0" />
-			</Link>
-			<Link
-				href="/orders"
-				className={cn(
-					buttonVariants({ variant: 'ghost', size: 'icon' }),
-					'shrink-0 hover:bg-accent/80',
-				)}
-			>
-				<ClipboardList className="size-4 shrink-0" />
-			</Link>
+			{links.map((link) => {
+				const isSelectedLink = link.href === pathname
+				const Icon = link.icon
+
+				return (
+					<Link
+						key={link.href}
+						href={link.href}
+						className={cn(
+							buttonVariants({
+								variant: isSelectedLink ? 'default' : 'ghost',
+								size: 'icon',
+							}),
+							'shrink-0',
+							!isSelectedLink && 'hover:bg-accent/80',
+						)}
+					>
+						<Icon className="size-4 shrink-0" />
+					</Link>
+				)
+			})}
 			<Separator orientation="vertical" className="mx-1 h-6" />
 			<AddProductDrawer />
 			<CartDrawer />
