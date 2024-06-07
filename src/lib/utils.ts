@@ -17,6 +17,7 @@ import {
 	ApplyProductFilterArgs,
 	CartItem,
 	Category,
+	CategoryName,
 	NanoidArgs,
 	Product,
 	RGB,
@@ -35,25 +36,29 @@ export function rupiah(value: number): string {
 		.slice(0, -3)
 }
 
-export function getCategoryIcon(category: Category['name']): LucideIcon {
+export function getCategoryIcon(category: CategoryName): LucideIcon {
 	switch (category) {
-		case 'Flooring Materials':
-			return Layers
-		case 'Fasteners and Hardware':
-			return Bolt
-		case 'Electrical Supplies':
-			return Zap
-		case 'Concrete and Masonry':
-			return HardHat
-		case 'Painting Supplies':
-			return Brush
-		case 'Plumbing Materials':
-			return Droplet
-		case 'Adhesives':
+		case 'adhesives':
 			return Package
-		case 'Construction Tools':
+		case 'concrete-and-masonry':
+			return HardHat
+		case 'construction-tools':
 			return Hammer
+		case 'electrical-supplies':
+			return Zap
+		case 'fasteners-and-hardware':
+			return Bolt
+		case 'flooring-materials':
+			return Layers
+		case 'painting-supplies':
+			return Brush
+		case 'plumbing-materials':
+			return Droplet
 	}
+}
+
+export function formatCategoryName(name: Category['name']): CategoryName {
+	return name.toLowerCase().split(' ').join('-') as CategoryName
 }
 
 function convert3To6DigitsHex(hex: string): string {

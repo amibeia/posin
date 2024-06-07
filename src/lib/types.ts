@@ -1,15 +1,20 @@
 import { LucideIcon } from 'lucide-react'
 
 import {
-	CATEGORY_NAMES,
-	PAYMENT_IDS,
-	TRANSPORTATION_IDS,
+	CATEGORIES,
+	ORDER_TYPES,
+	PAYMENT_METHODS,
+	TRANSPORTATION_METHODS,
 } from '@/lib/constants'
 
-export type CategoryName = (typeof CATEGORY_NAMES)[number]
+export type CategoryName = (typeof CATEGORIES)[number]
+export type PaymentMethod = (typeof PAYMENT_METHODS)[number]
+export type TransportationMethod = (typeof TRANSPORTATION_METHODS)[number]
+export type OrderType = (typeof ORDER_TYPES)[number]
+
 export type Category = {
 	id: string
-	name: CategoryName
+	name: string
 	color: string
 }
 
@@ -25,20 +30,6 @@ export type CartItem = {
 	quantity: number
 }
 export type Cart = CartItem[]
-
-export type PaymentMethod = (typeof PAYMENT_IDS)[number]
-export type PaymentMethodOption = {
-	id: PaymentMethod
-	label: string
-	icon: LucideIcon
-}
-
-export type TransportationMethod = (typeof TRANSPORTATION_IDS)[number]
-export type TransportationMethodOption = {
-	id: TransportationMethod
-	label: string
-	icon: LucideIcon
-}
 
 export type Order = {
 	id: string
@@ -56,11 +47,24 @@ export type RGB = {
 	b: number
 }
 
+export type PaymentMethodOption = {
+	id: PaymentMethod
+	label: string
+	icon: LucideIcon
+}
+
+export type TransportationMethodOption = {
+	id: TransportationMethod
+	label: string
+	icon: LucideIcon
+}
+
 export type ApplyProductFilterArgs = {
 	products: Product[]
 	query: string
 	categoryId: Category['id']
 }
+
 export type AddProductArgs = Omit<Product, 'id'>
 export type AddOrderArgs = Pick<Order, 'items'>
 export type NanoidArgs = {

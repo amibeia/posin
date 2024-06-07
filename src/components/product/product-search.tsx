@@ -6,12 +6,14 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
+import { QUERY_PARAMS } from '@/lib/constants'
+
 export default function ProductSearch() {
 	const router = useRouter()
 	const pathname = usePathname()
 	const searchParams = useSearchParams()
 
-	const query = searchParams.get('query') || ''
+	const query = searchParams.get(QUERY_PARAMS) || ''
 
 	const handleChange = ({
 		target: { value },
@@ -19,8 +21,8 @@ export default function ProductSearch() {
 		const urlSearchParams = new URLSearchParams(searchParams)
 
 		value
-			? urlSearchParams.set('query', value)
-			: urlSearchParams.delete('query')
+			? urlSearchParams.set(QUERY_PARAMS, value)
+			: urlSearchParams.delete(QUERY_PARAMS)
 
 		router.replace(`${pathname}?${urlSearchParams.toString()}`)
 	}
@@ -35,7 +37,7 @@ export default function ProductSearch() {
 				type="search"
 				autoComplete="off"
 				placeholder="Search by product name"
-				className="max-w-[300px] rounded-xl pl-8"
+				className="max-w-[200px] rounded-xl pl-8"
 				defaultValue={query}
 				onChange={handleChange}
 			/>

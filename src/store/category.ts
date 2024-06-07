@@ -2,19 +2,16 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 
 import categories from '@/data/categories.json'
-import { Category, CategoryName } from '@/lib/types'
+import { Category } from '@/lib/types'
 
 type CategoryState = {
 	categories: Category[]
 }
 
 const initialState: CategoryState = {
-	categories: categories
-		.sort((a, b) => (a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1))
-		.map((category) => ({
-			...category,
-			name: category.name as CategoryName,
-		})),
+	categories: categories.sort((a, b) =>
+		a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1,
+	),
 }
 
 const categoryStore = create<CategoryState>()(

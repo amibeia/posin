@@ -3,8 +3,14 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
+import { CATEGORY_PARAMS } from '@/lib/constants'
 import { Category } from '@/lib/types'
-import { cn, getCategoryIcon, lightenColor } from '@/lib/utils'
+import {
+	cn,
+	formatCategoryName,
+	getCategoryIcon,
+	lightenColor,
+} from '@/lib/utils'
 
 interface CategoryCardProps extends React.ComponentPropsWithoutRef<'div'> {
 	category: Category
@@ -20,8 +26,8 @@ export default function CategoryCard({
 	const pathname = usePathname()
 	const searchParams = useSearchParams()
 
-	const Icon = getCategoryIcon(category.name)
-	const selectedCategory = searchParams.get('category')
+	const Icon = getCategoryIcon(formatCategoryName(category.name))
+	const selectedCategory = searchParams.get(CATEGORY_PARAMS)
 	const isSelectedCategory =
 		selectedCategory && selectedCategory === category.name
 
@@ -29,8 +35,8 @@ export default function CategoryCard({
 		const urlSearchParams = new URLSearchParams(searchParams)
 
 		isSelectedCategory
-			? urlSearchParams.delete('category')
-			: urlSearchParams.set('category', category.name)
+			? urlSearchParams.delete(CATEGORY_PARAMS)
+			: urlSearchParams.set(CATEGORY_PARAMS, category.name)
 
 		router.replace(`${pathname}?${urlSearchParams.toString()}`)
 	}

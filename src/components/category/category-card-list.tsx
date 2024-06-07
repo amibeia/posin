@@ -3,7 +3,6 @@
 import CategoryCard from '@/components/category/category-card'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 
-import { CategoryName } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { useCategories } from '@/store/category'
 
@@ -19,7 +18,7 @@ export default function CategoryCardList(props: CategoryCardListProps) {
 				{categories.map((category, index) => (
 					<CategoryCard
 						key={category.id}
-						category={{ ...category, name: category.name as CategoryName }}
+						category={category}
 						className={cn(categories.length - 1 === index && 'mr-4')}
 					/>
 				))}

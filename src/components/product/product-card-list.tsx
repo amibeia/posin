@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation'
 import ProductCard from '@/components/product/product-card'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
+import { CATEGORY_PARAMS, QUERY_PARAMS } from '@/lib/constants'
 import { applyProductFilter, cn } from '@/lib/utils'
 import { useCategories } from '@/store/category'
 import { useProducts } from '@/store/product'
@@ -18,8 +19,8 @@ export default function ProductCardList(props: ProductCardList) {
 	const categories = useCategories()
 	const searchParams = useSearchParams()
 
-	const query = searchParams.get('query') || ''
-	const selectedCategoryName = searchParams.get('category')
+	const query = searchParams.get(QUERY_PARAMS) || ''
+	const selectedCategoryName = searchParams.get(CATEGORY_PARAMS)
 	const selectedCategory = categories.find(
 		(category) => category.name === selectedCategoryName,
 	)

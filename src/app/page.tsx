@@ -1,9 +1,11 @@
 import { Suspense } from 'react'
 
 import CategoryCardList from '@/components/category/category-card-list'
+import OrderTypeSwitch from '@/components/order/order-type-switch'
 import ProductCardList from '@/components/product/product-card-list'
 import ProductSearch from '@/components/product/product-search'
 import CategoryCardListSkeleton from '@/components/skeleton/category-card-list-skeleton'
+import OrderTypeSwitchSkeleton from '@/components/skeleton/order-type-switch-skeleton'
 import ProductCardListSkeleton from '@/components/skeleton/product-card-list-skeleton'
 import ProductSearchSkeleton from '@/components/skeleton/product-search-skeleton'
 import { Separator } from '@/components/ui/separator'
@@ -11,9 +13,12 @@ import { Separator } from '@/components/ui/separator'
 export default function HomePage() {
 	return (
 		<main className="mx-auto flex h-dvh max-w-xl flex-col">
-			<section className="p-4 pb-0">
+			<section className="flex items-center justify-between gap-2 p-4 pb-0">
 				<Suspense fallback={<ProductSearchSkeleton />}>
 					<ProductSearch />
+				</Suspense>
+				<Suspense fallback={<OrderTypeSwitchSkeleton />}>
+					<OrderTypeSwitch />
 				</Suspense>
 			</section>
 			<Suspense fallback={<CategoryCardListSkeleton className="ml-4 py-4" />}>
