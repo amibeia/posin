@@ -19,14 +19,14 @@ import {
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 
-import { CATEGORY_NAMES } from '@/lib/constants'
+import { CATEGORIES } from '@/lib/constants'
 import { useCategories } from '@/store/category'
 import { useProductActions } from '@/store/product'
 
 const formSchema = z.object({
 	name: z.string().min(3),
 	price: z.coerce.number().min(100),
-	categoryName: z.enum(CATEGORY_NAMES),
+	categoryName: z.enum(CATEGORIES),
 })
 
 export default function AddProductForm() {

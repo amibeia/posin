@@ -61,6 +61,19 @@ export function formatCategoryName(name: Category['name']): CategoryName {
 	return name.toLowerCase().split(' ').join('-') as CategoryName
 }
 
+export function parseCategoryName(name: CategoryName): Category['name'] {
+	return name
+		.split('-')
+		.map((char) => {
+			if (char !== 'and') {
+				return char[0].toUpperCase() + char.slice(1)
+			}
+
+			return char
+		})
+		.join(' ')
+}
+
 function convert3To6DigitsHex(hex: string): string {
 	return (
 		'#' +

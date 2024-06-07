@@ -26,17 +26,18 @@ export default function CategoryCard({
 	const pathname = usePathname()
 	const searchParams = useSearchParams()
 
-	const Icon = getCategoryIcon(formatCategoryName(category.name))
+	const categoryNameParams = formatCategoryName(category.name)
+	const Icon = getCategoryIcon(categoryNameParams)
 	const selectedCategory = searchParams.get(CATEGORY_PARAMS)
 	const isSelectedCategory =
-		selectedCategory && selectedCategory === category.name
+		selectedCategory && selectedCategory === categoryNameParams
 
 	const handleClick = () => {
 		const urlSearchParams = new URLSearchParams(searchParams)
 
 		isSelectedCategory
 			? urlSearchParams.delete(CATEGORY_PARAMS)
-			: urlSearchParams.set(CATEGORY_PARAMS, category.name)
+			: urlSearchParams.set(CATEGORY_PARAMS, categoryNameParams)
 
 		router.replace(`${pathname}?${urlSearchParams.toString()}`)
 	}

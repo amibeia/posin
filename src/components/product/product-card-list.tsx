@@ -7,7 +7,8 @@ import ProductCard from '@/components/product/product-card'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
 import { CATEGORY_PARAMS, QUERY_PARAMS } from '@/lib/constants'
-import { applyProductFilter, cn } from '@/lib/utils'
+import { CategoryName } from '@/lib/types'
+import { applyProductFilter, cn, parseCategoryName } from '@/lib/utils'
 import { useCategories } from '@/store/category'
 import { useProducts } from '@/store/product'
 
@@ -21,9 +22,14 @@ export default function ProductCardList(props: ProductCardList) {
 
 	const query = searchParams.get(QUERY_PARAMS) || ''
 	const selectedCategoryName = searchParams.get(CATEGORY_PARAMS)
-	const selectedCategory = categories.find(
-		(category) => category.name === selectedCategoryName,
-	)
+
+	const selectedCategory = selectedCategoryName
+		? categories.find(
+				(category) =>
+					category.name ===
+					parseCategoryName(selectedCategoryName as CategoryName),
+			)
+		: undefined
 
 	const filteredProducts = applyProductFilter({
 		products,
