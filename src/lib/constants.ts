@@ -15,16 +15,17 @@ import {
 	LucideIcon,
 	Package,
 	QrCode,
+	Ship,
 	ShoppingBag,
 	Truck,
 	Zap,
 } from 'lucide-react'
 
 import {
-	BagType,
-	BagTypeOption,
 	CategoryName,
 	CategoryOption,
+	OrderShippingType,
+	OrderShippingTypeOption,
 	OrderStatus,
 	OrderStatusOption,
 	OrderType,
@@ -36,10 +37,11 @@ import {
 
 export const QUERY_PARAMS = 'query'
 export const CATEGORY_PARAMS = 'category'
+export const ORDER_STATUS_PARAMS = 'order-status'
+export const ORDER_SHIPPING_TYPE_PARAMS = 'order-shipped-type'
 export const ORDER_TYPE_PARAMS = 'order-type'
 export const PAYMENT_METHOD_PARAMS = 'payment-method'
 export const TRANSPORTATION_METHOD_PARAMS = 'transportation-method'
-export const ORDER_STATUS_PARAMS = 'order-status'
 
 export const PREFIX_PRODUCT_ID = 'P'
 export const PREFIX_CATEGORY_ID = 'C'
@@ -55,21 +57,21 @@ export const CATEGORIES = [
 	'painting-supplies',
 	'plumbing-materials',
 ] as const
+export const ORDER_STATUS = ['completed', 'uncompleted'] as const
+export const ORDER_SHIPPING_TYPES = ['shopping-bag', 'ship'] as const
+export const ORDER_TYPES = ['customer-order', 'inventory-order'] as const
 export const PAYMENT_METHODS = ['cash', 'credit-card', 'e-wallet'] as const
-export const BAG_TYPES = ['shopping-bag'] as const
 export const TRANSPORTATION_METHODS = [
 	's-truck',
 	'm-truck',
 	'l-truck',
 	'motor-cycle',
 ] as const
-export const ORDER_STATUS = ['completed', 'uncompleted'] as const
-export const ORDER_TYPES = ['customer-order', 'inventory-order'] as const
 
+export const DEFAULT_ORDER_TYPE: OrderType = 'customer-order'
 export const DEFAULT_IS_NEED_SHIPPED: boolean = false
 export const DEFAULT_PAYMENT_METHOD: PaymentMethod = 'cash'
 export const DEFAULT_TRANSPORTATION_METHOD: TransportationMethod = 's-truck'
-export const DEFAULT_ORDER_TYPE: OrderType = 'customer-order'
 
 export const CATEGORY_OPTION: CategoryOption[] = [
 	{ id: 'adhesives', label: 'Adhesives', icon: Package },
@@ -89,13 +91,18 @@ export const CATEGORY_OPTION: CategoryOption[] = [
 	{ id: 'painting-supplies', label: 'Painting Supplies', icon: Brush },
 	{ id: 'plumbing-materials', label: 'Plumbing Materials', icon: Droplet },
 ]
+export const ORDER_STATUS_OPTIONS: OrderStatusOption[] = [
+	{ id: 'completed', label: 'Completed', icon: CircleCheck },
+	{ id: 'uncompleted', label: 'Uncompleted', icon: CircleX },
+]
+export const ORDER_SHIPPING_TYPE_OPTIONS: OrderShippingTypeOption[] = [
+	{ id: 'shopping-bag', label: 'Shopping Bag', icon: ShoppingBag },
+	{ id: 'ship', label: 'Ship', icon: Ship },
+]
 export const PAYMENT_METHOD_OPTIONS: PaymentMethodOption[] = [
 	{ id: 'cash', label: 'Cash', icon: CircleDollarSign },
 	{ id: 'credit-card', label: 'Credit Card', icon: CreditCard },
 	{ id: 'e-wallet', label: 'E-Wallet', icon: QrCode },
-]
-export const BAG_TYPE_OPTIONS: BagTypeOption[] = [
-	{ id: 'shopping-bag', label: 'Shopping Bag', icon: ShoppingBag },
 ]
 export const TRANSPORTATION_METHOD_OPTIONS: TransportationMethodOption[] = [
 	{ id: 's-truck', label: 'S Truck', icon: Car },
@@ -103,39 +110,33 @@ export const TRANSPORTATION_METHOD_OPTIONS: TransportationMethodOption[] = [
 	{ id: 'l-truck', label: 'L Truck', icon: Truck },
 	{ id: 'motor-cycle', label: 'M Cycle', icon: Bike },
 ]
-export const ORDER_STATUS_OPTIONS: OrderStatusOption[] = [
-	{ id: 'completed', label: 'Completed', icon: CircleCheck },
-	{ id: 'uncompleted', label: 'Uncompleted', icon: CircleX },
-]
 
 export const CATEGORY_ICONS: LucideIcon[] = CATEGORY_OPTION.map(
 	(obj) => obj.icon,
 )
-export const PAYMENT_METHOD_ICONS: LucideIcon[] = PAYMENT_METHOD_OPTIONS.map(
+export const ORDER_STATUS_ICONS: LucideIcon[] = ORDER_STATUS_OPTIONS.map(
 	(obj) => obj.icon,
 )
-export const BAG_TYPE_ICONS: LucideIcon[] = BAG_TYPE_OPTIONS.map(
+export const ORDER_SHIPPING_ICONS: LucideIcon[] =
+	ORDER_SHIPPING_TYPE_OPTIONS.map((obj) => obj.icon)
+export const PAYMENT_METHOD_ICONS: LucideIcon[] = PAYMENT_METHOD_OPTIONS.map(
 	(obj) => obj.icon,
 )
 export const TRANSPORTATION_METHOD_ICONS: LucideIcon[] =
 	TRANSPORTATION_METHOD_OPTIONS.map((obj) => obj.icon)
-export const ORDER_STATUS_ICONS: LucideIcon[] = ORDER_STATUS_OPTIONS.map(
-	(obj) => obj.icon,
-)
 
 export const CATEGORY_ICON_MAP: Map<CategoryName, LucideIcon> = new Map(
 	CATEGORY_OPTION.map((obj) => [obj.id, obj.icon]),
 )
+export const ORDER_STATUS_ICON_MAP: Map<OrderStatus, LucideIcon> = new Map(
+	ORDER_STATUS_OPTIONS.map((obj) => [obj.id, obj.icon]),
+)
+export const ORDER_SHIPPING_ICON_MAP: Map<OrderShippingType, LucideIcon> =
+	new Map(ORDER_SHIPPING_TYPE_OPTIONS.map((obj) => [obj.id, obj.icon]))
 export const PAYMENT_METHOD_ICON_MAP: Map<PaymentMethod, LucideIcon> = new Map(
 	PAYMENT_METHOD_OPTIONS.map((obj) => [obj.id, obj.icon]),
-)
-export const BAG_TYPE_ICON_MAP: Map<BagType, LucideIcon> = new Map(
-	BAG_TYPE_OPTIONS.map((obj) => [obj.id, obj.icon]),
 )
 export const TRANSPORTATION_METHOD_ICON_MAP: Map<
 	TransportationMethod,
 	LucideIcon
 > = new Map(TRANSPORTATION_METHOD_OPTIONS.map((obj) => [obj.id, obj.icon]))
-export const ORDER_STATUS_ICON_MAP: Map<OrderStatus, LucideIcon> = new Map(
-	ORDER_STATUS_OPTIONS.map((obj) => [obj.id, obj.icon]),
-)

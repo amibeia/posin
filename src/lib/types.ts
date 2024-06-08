@@ -1,8 +1,8 @@
 import { LucideIcon } from 'lucide-react'
 
 import {
-	BAG_TYPES,
 	CATEGORIES,
+	ORDER_SHIPPING_TYPES,
 	ORDER_STATUS,
 	ORDER_TYPES,
 	PAYMENT_METHODS,
@@ -11,7 +11,7 @@ import {
 
 export type CategoryName = (typeof CATEGORIES)[number]
 export type PaymentMethod = (typeof PAYMENT_METHODS)[number]
-export type BagType = (typeof BAG_TYPES)[number]
+export type OrderShippingType = (typeof ORDER_SHIPPING_TYPES)[number]
 export type TransportationMethod = (typeof TRANSPORTATION_METHODS)[number]
 export type OrderStatus = (typeof ORDER_STATUS)[number]
 export type OrderType = (typeof ORDER_TYPES)[number]
@@ -61,8 +61,8 @@ export type PaymentMethodOption = {
 	label: string
 	icon: LucideIcon
 }
-export type BagTypeOption = {
-	id: BagType
+export type OrderShippingTypeOption = {
+	id: OrderShippingType
 	label: string
 	icon: LucideIcon
 }
@@ -77,12 +77,18 @@ export type OrderStatusOption = {
 	icon: LucideIcon
 }
 
-export type ApplyProductFilterArgs = {
+export type ApplyProductFiltersArgs = {
 	products: Product[]
-	query: string
-	categoryId: Category['id']
+	query?: string
+	categoryId?: Category['id']
 }
-
+export type ApplyOrderFiltersArgs = {
+	orders: Order[]
+	orderStatus?: OrderStatus
+	paymentMethod?: PaymentMethod
+	orderShippingType?: OrderShippingType
+	transportationMethod?: TransportationMethod
+}
 export type AddProductArgs = Omit<Product, 'id'>
 export type AddOrderArgs = Pick<Order, 'items'>
 export type NanoidArgs = {

@@ -8,7 +8,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 
 import { CATEGORY_PARAMS, QUERY_PARAMS } from '@/lib/constants'
 import { CategoryName } from '@/lib/types'
-import { applyProductFilter, cn, parseCategoryName } from '@/lib/utils'
+import { applyProductFilters, cn, parseCategoryName } from '@/lib/utils'
 import { useCategories } from '@/store/category'
 import { useProducts } from '@/store/product'
 
@@ -20,21 +20,20 @@ export default function ProductCardList(props: ProductCardList) {
 	const categories = useCategories()
 	const searchParams = useSearchParams()
 
-	const query = searchParams.get(QUERY_PARAMS) || ''
-	const selectedCategoryName = searchParams.get(CATEGORY_PARAMS)
+	const queryParams = searchParams.get(QUERY_PARAMS) || undefined
+	const categoryParams = searchParams.get(CATEGORY_PARAMS) || undefined
 
-	const selectedCategory = selectedCategoryName
+	const selectedCategory = categoryParams
 		? categories.find(
 				(category) =>
-					category.name ===
-					parseCategoryName(selectedCategoryName as CategoryName),
+					category.name === parseCategoryName(categoryParams as CategoryName),
 			)
 		: undefined
 
-	const filteredProducts = applyProductFilter({
+	const filteredProducts = applyProductFilters({
 		products,
-		query,
-		categoryId: selectedCategory ? selectedCategory.id : '',
+		query: queryParams,
+		categoryId: selectedCategory ? selectedCategory.id : undefined,
 	})
 
 	return filteredProducts.length !== 0 ? (
@@ -48,7 +47,9 @@ export default function ProductCardList(props: ProductCardList) {
 						<ProductCard
 							key={product.id}
 							product={product}
-							className={cn(products.length - 1 === index && 'mb-[65px]')}
+							className={cn(
+								filteredProducts.length - 1 === index && 'mb-[65px]',
+							)}
 						/>
 					))}
 			</section>

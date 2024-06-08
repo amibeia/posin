@@ -47,7 +47,9 @@ export default function OrderCard({
 			</section>
 			<OrderTable order={order} />
 			{order.transportationMethod && !order.hasShipped && (
-				<Button onClick={() => orderActions.shipOrder(order.id)}>Ship</Button>
+				<section className="flex items-center justify-end">
+					<Button onClick={() => orderActions.shipOrder(order.id)}>Ship</Button>
+				</section>
 			)}
 		</div>
 	)

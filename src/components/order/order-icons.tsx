@@ -1,5 +1,5 @@
 import {
-	BAG_TYPE_ICON_MAP,
+	ORDER_SHIPPING_ICON_MAP,
 	ORDER_STATUS_ICON_MAP,
 	PAYMENT_METHOD_ICON_MAP,
 	TRANSPORTATION_METHOD_ICON_MAP,
@@ -14,7 +14,7 @@ export default function OrderIcons({ order }: OrderIconsProps) {
 	const PaymentMethodIcon = PAYMENT_METHOD_ICON_MAP.get(order.paymentMethod)!
 	const ShippingIcon = order.transportationMethod
 		? TRANSPORTATION_METHOD_ICON_MAP.get(order.transportationMethod)!
-		: BAG_TYPE_ICON_MAP.get('shopping-bag')!
+		: ORDER_SHIPPING_ICON_MAP.get('shopping-bag')!
 	const CompletedIcon = ORDER_STATUS_ICON_MAP.get(
 		order.hasShipped ? 'completed' : 'uncompleted',
 	)!

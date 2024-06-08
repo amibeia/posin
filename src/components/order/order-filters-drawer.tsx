@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/drawer'
 import { Separator } from '@/components/ui/separator'
 import {
+	ORDER_SHIPPING_TYPE_PARAMS,
 	ORDER_STATUS_PARAMS,
 	PAYMENT_METHOD_PARAMS,
 	TRANSPORTATION_METHOD_PARAMS,
@@ -29,6 +30,7 @@ export default function OrderFiltersDrawer() {
 	const searchParams = useSearchParams()
 
 	const isOrderFiltersExist =
+		Boolean(searchParams.get(ORDER_SHIPPING_TYPE_PARAMS)) ||
 		Boolean(searchParams.get(ORDER_STATUS_PARAMS)) ||
 		Boolean(searchParams.get(PAYMENT_METHOD_PARAMS)) ||
 		Boolean(searchParams.get(TRANSPORTATION_METHOD_PARAMS))
@@ -36,6 +38,7 @@ export default function OrderFiltersDrawer() {
 	const handleResetFilters = () => {
 		const urlSearchParams = new URLSearchParams(searchParams)
 
+		urlSearchParams.delete(ORDER_SHIPPING_TYPE_PARAMS)
 		urlSearchParams.delete(ORDER_STATUS_PARAMS)
 		urlSearchParams.delete(PAYMENT_METHOD_PARAMS)
 		urlSearchParams.delete(TRANSPORTATION_METHOD_PARAMS)

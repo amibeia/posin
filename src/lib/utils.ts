@@ -3,11 +3,13 @@ import { customAlphabet } from 'nanoid'
 import { twMerge } from 'tailwind-merge'
 
 import {
-	ApplyProductFilterArgs,
+	ApplyOrderFiltersArgs,
+	ApplyProductFiltersArgs,
 	CartItem,
 	Category,
 	CategoryName,
 	NanoidArgs,
+	Order,
 	Product,
 	RGB,
 } from '@/lib/types'
@@ -78,11 +80,11 @@ export function lightenColor(hex: string, percent: number): string {
 	return `#${formatHexValue(lightenHex(r, percent))}${formatHexValue(lightenHex(g, percent))}${formatHexValue(lightenHex(b, percent))}`
 }
 
-export function applyProductFilter({
+export function applyProductFilters({
 	products,
 	query,
 	categoryId,
-}: ApplyProductFilterArgs): Product[] {
+}: ApplyProductFiltersArgs): Product[] {
 	let filteredProducts = [...products]
 
 	if (query) {
@@ -98,6 +100,46 @@ export function applyProductFilter({
 	}
 
 	return filteredProducts
+}
+
+export function applyOrderFilters({
+	orders,
+	orderStatus,
+	paymentMethod,
+	orderShippingType,
+	transportationMethod,
+}: ApplyOrderFiltersArgs): Order[] {
+	let filteredOrders = [...orders]
+
+	if (orderStatus) {
+		filteredOrders = filteredOrders.filter(
+			(order) =>
+				(orderStatus === 'completed' && order.hasShipped) ||
+				(orderStatus === 'uncompleted' && !order.hasShipped),
+		)
+	}
+
+	if (paymentMethod) {
+		filteredOrders = filteredOrders.filter(
+			(order) => order.paymentMethod === paymentMethod,
+		)
+	}
+
+	if (orderShippingType) {
+		filteredOrders = filteredOrders.filter(
+			(order) =>
+				(orderShippingType === 'ship' && order.transportationMethod) ||
+				(orderShippingType === 'shopping-bag' && !order.transportationMethod),
+		)
+	}
+
+	if (transportationMethod) {
+		filteredOrders = filteredOrders.filter(
+			(order) => order.transportationMethod === transportationMethod,
+		)
+	}
+
+	return filteredOrders
 }
 
 export function nanoid(
