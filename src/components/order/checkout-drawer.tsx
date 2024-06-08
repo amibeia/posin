@@ -48,11 +48,7 @@ export default function CheckoutDrawer() {
 	return (
 		<DrawerNested open={open} onOpenChange={setOpen} dismissible={false}>
 			<DrawerTrigger asChild>
-				<Button
-					size="lg"
-					className="w-full rounded-full"
-					disabled={cart.length === 0}
-				>
+				<Button size="lg" className="rounded-full" disabled={cart.length === 0}>
 					Checkout
 				</Button>
 			</DrawerTrigger>
@@ -71,9 +67,8 @@ export default function CheckoutDrawer() {
 					<div className="flex flex-1 flex-col gap-4">
 						<section className="flex flex-col gap-1">
 							<div className="flex items-center justify-between">
-								<Label htmlFor="order-switch">Ship this order</Label>
+								<Label>Ship this order</Label>
 								<Switch
-									id="order-switch"
 									checked={order.isNeedShipped}
 									onCheckedChange={() => orderActions.toggleNeedShipped()}
 								/>
@@ -84,20 +79,18 @@ export default function CheckoutDrawer() {
 						</section>
 						{order.isNeedShipped && (
 							<section className="flex flex-col gap-2">
-								<Label htmlFor="transportation-method-select">
-									Transportation method
-								</Label>
+								<Label>Transportation method</Label>
 								<TransportationMethodOptionList />
 							</section>
 						)}
 					</div>
 					<section className="flex flex-col gap-2">
-						<Label htmlFor="payment-method-select">Payment method</Label>
+						<Label>Payment method</Label>
 						<PaymentMethodOptionList />
 					</section>
 				</section>
 				<Separator />
-				<DrawerFooter className="flex-row">
+				<DrawerFooter className="flex-row justify-between">
 					<DrawerClose asChild>
 						<Button
 							variant="outline"
@@ -109,7 +102,7 @@ export default function CheckoutDrawer() {
 					</DrawerClose>
 					<Button
 						size="lg"
-						className="w-full rounded-full"
+						className="rounded-full"
 						disabled={cart.length === 0}
 						onClick={handleCreateOrderClick}
 					>

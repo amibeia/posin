@@ -68,7 +68,7 @@ export default function CartDrawer() {
 						<span className="text-base">Total</span>
 						<span className="text-base font-bold">{rupiah(total)}</span>
 					</div>
-					<div className="flex items-center gap-2">
+					<div className="flex items-center justify-between">
 						<DrawerClose asChild>
 							<Button
 								variant="outline"

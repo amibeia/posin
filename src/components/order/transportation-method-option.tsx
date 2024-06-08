@@ -25,10 +25,11 @@ export default function TransportationMethodOption({
 		<div className="flex flex-col items-center justify-center gap-1" {...props}>
 			<Button
 				variant={isOptionSelected ? 'default' : 'outline'}
-				className="h-10 w-full"
+				size="sm"
 				onClick={() => orderActions.changeTransportationMethod(option.id)}
+				className="w-full"
 			>
-				<Icon className="size-6 shrink-0" />
+				<Icon className="size-4 shrink-0" />
 			</Button>
 			<span className="text-xs">{option.label}</span>
 		</div>

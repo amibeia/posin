@@ -122,7 +122,7 @@ export default function AddProductForm() {
 					</div>
 				</section>
 				<Separator />
-				<section className="mt-auto flex items-center gap-2 p-4">
+				<section className="mt-auto flex items-center justify-between p-4">
 					<DrawerClose asChild>
 						<Button
 							type="button"
@@ -137,7 +137,7 @@ export default function AddProductForm() {
 						type="submit"
 						size="lg"
 						disabled={!form.formState.isValid}
-						className="w-full rounded-full"
+						className="rounded-full"
 					>
 						Add Product
 					</Button>

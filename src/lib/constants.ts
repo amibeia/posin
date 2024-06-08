@@ -37,6 +37,9 @@ import {
 export const QUERY_PARAMS = 'query'
 export const CATEGORY_PARAMS = 'category'
 export const ORDER_TYPE_PARAMS = 'order-type'
+export const PAYMENT_METHOD_PARAMS = 'payment-method'
+export const TRANSPORTATION_METHOD_PARAMS = 'transportation-method'
+export const ORDER_STATUS_PARAMS = 'order-status'
 
 export const PREFIX_PRODUCT_ID = 'P'
 export const PREFIX_CATEGORY_ID = 'C'
