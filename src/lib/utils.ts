@@ -13,6 +13,7 @@ import {
 	Product,
 	RGB,
 } from '@/lib/types'
+import { LAZY_COMPONENT_DELAY } from './constants'
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
@@ -157,4 +158,8 @@ export function getOrderTotal(items: CartItem[]): number {
 		(value, item) => item.product.price * item.quantity + value,
 		0,
 	)
+}
+
+export async function delay(duration: number = LAZY_COMPONENT_DELAY) {
+	return new Promise((resolve) => setTimeout(resolve, duration))
 }

@@ -1,14 +1,48 @@
-import { Suspense } from 'react'
+import { Suspense, lazy } from 'react'
 
-import CategoryCardList from '@/components/category/category-card-list'
-import OrderTypeSwitch from '@/components/order/order-type-switch'
-import ProductCardList from '@/components/product/product-card-list'
-import ProductSearch from '@/components/product/product-search'
 import CategoryCardListSkeleton from '@/components/skeleton/category-card-list-skeleton'
 import OrderTypeSwitchSkeleton from '@/components/skeleton/order-type-switch-skeleton'
 import ProductCardListSkeleton from '@/components/skeleton/product-card-list-skeleton'
 import ProductSearchSkeleton from '@/components/skeleton/product-search-skeleton'
 import { Separator } from '@/components/ui/separator'
+
+import { delay } from '@/lib/utils'
+
+const ProductSearch = lazy(async () => {
+	const [moduleExports] = await Promise.all([
+		import('@/components/product/product-search'),
+		delay(),
+	])
+
+	return moduleExports
+})
+
+const OrderTypeSwitch = lazy(async () => {
+	const [moduleExports] = await Promise.all([
+		import('@/components/order/order-type-switch'),
+		delay(),
+	])
+
+	return moduleExports
+})
+
+const CategoryCardList = lazy(async () => {
+	const [moduleExports] = await Promise.all([
+		import('@/components/category/category-card-list'),
+		delay(),
+	])
+
+	return moduleExports
+})
+
+const ProductCardList = lazy(async () => {
+	const [moduleExports] = await Promise.all([
+		import('@/components/product/product-card-list'),
+		delay(),
+	])
+
+	return moduleExports
+})
 
 export default function HomePage() {
 	return (

@@ -1,9 +1,27 @@
-import { Suspense } from 'react'
+import { Suspense, lazy } from 'react'
 
-import OrderCardList from '@/components/order/order-card-list'
-import OrderFiltersDrawer from '@/components/order/order-filters-drawer'
 import OrderCardListSkeleton from '@/components/skeleton/order-card-list-skeleton'
 import OrderFiltersDrawerSkeleton from '@/components/skeleton/order-filters-drawer-skeleton'
+
+import { delay } from '@/lib/utils'
+
+const OrderFiltersDrawer = lazy(async () => {
+	const [moduleExports] = await Promise.all([
+		import('@/components/order/order-filters-drawer'),
+		delay(),
+	])
+
+	return moduleExports
+})
+
+const OrderCardList = lazy(async () => {
+	const [moduleExports] = await Promise.all([
+		import('@/components/order/order-card-list'),
+		delay(),
+	])
+
+	return moduleExports
+})
 
 export default function OrdersPage() {
 	return (
