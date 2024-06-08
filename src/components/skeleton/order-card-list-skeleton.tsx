@@ -3,13 +3,13 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 import { cn } from '@/lib/utils'
 
-interface ProductCardListSkeletonProps
+interface OrderCardListSkeletonProps
 	extends React.ComponentPropsWithoutRef<typeof ScrollArea> {}
 
-export default function ProductCardListSkeleton(
-	props: ProductCardListSkeletonProps,
+export default function OrderCardListSkeleton(
+	props: OrderCardListSkeletonProps,
 ) {
-	const size = 40
+	const size = 10
 
 	return (
 		<ScrollArea {...props}>
@@ -19,7 +19,7 @@ export default function ProductCardListSkeleton(
 						<Skeleton
 							key={id}
 							className={cn(
-								'flex h-[54px] rounded-xl border border-input shadow-sm',
+								'flex h-[400px] rounded-xl border border-input shadow-sm',
 								size - 1 === index && 'mb-[65px]',
 							)}
 						/>
