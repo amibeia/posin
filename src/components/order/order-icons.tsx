@@ -1,8 +1,8 @@
-import { CircleCheck, CircleX, ShoppingBag } from 'lucide-react'
-
 import {
-	PAYMENT_METHOD_OPTIONS,
-	TRANSPORTATION_METHOD_OPTIONS,
+	BAG_TYPE_ICON_MAP,
+	ORDER_STATUS_ICON_MAP,
+	PAYMENT_METHOD_ICON_MAP,
+	TRANSPORTATION_METHOD_ICON_MAP,
 } from '@/lib/constants'
 import { Order } from '@/lib/types'
 
@@ -11,25 +11,21 @@ interface OrderIconsProps {
 }
 
 export default function OrderIcons({ order }: OrderIconsProps) {
-	const PaymentMethodIcon = PAYMENT_METHOD_OPTIONS.find(
-		(option) => option.id === order.paymentMethod,
-	)!.icon
+	const PaymentMethodIcon = PAYMENT_METHOD_ICON_MAP.get(order.paymentMethod)!
+	const ShippingIcon = order.transportationMethod
+		? TRANSPORTATION_METHOD_ICON_MAP.get(order.transportationMethod)!
+		: BAG_TYPE_ICON_MAP.get('shopping-bag')!
+	const CompletedIcon = ORDER_STATUS_ICON_MAP.get(
+		order.hasShipped ? 'completed' : 'uncompleted',
+	)!
 
-	const ShipIcon = order.transportationMethod
-		? TRANSPORTATION_METHOD_OPTIONS.find(
-				(option) => option.id === order.transportationMethod,
-			)!.icon
-		: ShoppingBag
-
-	const CompletedIcon = order.hasShipped ? CircleCheck : CircleX
-
-	const iconStyle = { className: 'size-4 shrink-0' }
+	const icons = [PaymentMethodIcon, ShippingIcon, CompletedIcon]
 
 	return (
 		<section className="flex items-center gap-2">
-			<PaymentMethodIcon {...iconStyle} />
-			<ShipIcon {...iconStyle} />
-			<CompletedIcon {...iconStyle} />
+			{icons.map((Icon, index) => (
+				<Icon key={Icon.displayName! + index} className="size-4 shrink-0" />
+			))}
 		</section>
 	)
 }

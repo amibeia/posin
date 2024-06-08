@@ -1,15 +1,4 @@
 import { clsx, type ClassValue } from 'clsx'
-import {
-	Bolt,
-	Brush,
-	Droplet,
-	Hammer,
-	HardHat,
-	Layers,
-	LucideIcon,
-	Package,
-	Zap,
-} from 'lucide-react'
 import { customAlphabet } from 'nanoid'
 import { twMerge } from 'tailwind-merge'
 
@@ -34,27 +23,6 @@ export function rupiah(value: number): string {
 	})
 		.format(value)
 		.slice(0, -3)
-}
-
-export function getCategoryIcon(category: CategoryName): LucideIcon {
-	switch (category) {
-		case 'adhesives':
-			return Package
-		case 'concrete-and-masonry':
-			return HardHat
-		case 'construction-tools':
-			return Hammer
-		case 'electrical-supplies':
-			return Zap
-		case 'fasteners-and-hardware':
-			return Bolt
-		case 'flooring-materials':
-			return Layers
-		case 'painting-supplies':
-			return Brush
-		case 'plumbing-materials':
-			return Droplet
-	}
 }
 
 export function formatCategoryName(name: Category['name']): CategoryName {

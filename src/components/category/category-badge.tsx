@@ -4,8 +4,9 @@ import { useState } from 'react'
 
 import { Badge } from '@/components/ui/badge'
 
+import { CATEGORY_ICON_MAP } from '@/lib/constants'
 import { Category } from '@/lib/types'
-import { getCategoryIcon, lightenColor } from '@/lib/utils'
+import { formatCategoryName, lightenColor } from '@/lib/utils'
 
 interface CategoryBadge {
 	name: Category['name']
@@ -16,7 +17,7 @@ interface CategoryBadge {
 export default function CategoryBadge({ name, color, total }: CategoryBadge) {
 	const [isHovered, setIsHovered] = useState(false)
 
-	const Icon = getCategoryIcon(name)
+	const Icon = CATEGORY_ICON_MAP.get(formatCategoryName(name))!
 
 	return (
 		<Badge

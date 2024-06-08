@@ -1,7 +1,9 @@
 import { LucideIcon } from 'lucide-react'
 
 import {
+	BAG_TYPES,
 	CATEGORIES,
+	ORDER_STATUS,
 	ORDER_TYPES,
 	PAYMENT_METHODS,
 	TRANSPORTATION_METHODS,
@@ -9,7 +11,9 @@ import {
 
 export type CategoryName = (typeof CATEGORIES)[number]
 export type PaymentMethod = (typeof PAYMENT_METHODS)[number]
+export type BagType = (typeof BAG_TYPES)[number]
 export type TransportationMethod = (typeof TRANSPORTATION_METHODS)[number]
+export type OrderStatus = (typeof ORDER_STATUS)[number]
 export type OrderType = (typeof ORDER_TYPES)[number]
 
 export type Category = {
@@ -47,14 +51,28 @@ export type RGB = {
 	b: number
 }
 
+export type CategoryOption = {
+	id: CategoryName
+	label: string
+	icon: LucideIcon
+}
 export type PaymentMethodOption = {
 	id: PaymentMethod
 	label: string
 	icon: LucideIcon
 }
-
+export type BagTypeOption = {
+	id: BagType
+	label: string
+	icon: LucideIcon
+}
 export type TransportationMethodOption = {
 	id: TransportationMethod
+	label: string
+	icon: LucideIcon
+}
+export type OrderStatusOption = {
+	id: OrderStatus
 	label: string
 	icon: LucideIcon
 }

@@ -3,14 +3,9 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
-import { CATEGORY_PARAMS } from '@/lib/constants'
+import { CATEGORY_ICON_MAP, CATEGORY_PARAMS } from '@/lib/constants'
 import { Category } from '@/lib/types'
-import {
-	cn,
-	formatCategoryName,
-	getCategoryIcon,
-	lightenColor,
-} from '@/lib/utils'
+import { cn, formatCategoryName, lightenColor } from '@/lib/utils'
 
 interface CategoryCardProps extends React.ComponentPropsWithoutRef<'div'> {
 	category: Category
@@ -27,7 +22,7 @@ export default function CategoryCard({
 	const searchParams = useSearchParams()
 
 	const categoryNameParams = formatCategoryName(category.name)
-	const Icon = getCategoryIcon(categoryNameParams)
+	const CategoryIcon = CATEGORY_ICON_MAP.get(categoryNameParams)!
 	const selectedCategory = searchParams.get(CATEGORY_PARAMS)
 	const isSelectedCategory =
 		selectedCategory && selectedCategory === categoryNameParams
@@ -75,7 +70,7 @@ export default function CategoryCard({
 				}}
 				className="flex size-12 shrink-0 items-center justify-center rounded-full transition-colors"
 			>
-				<Icon className="size-5 shrink-0" />
+				<CategoryIcon className="size-5 shrink-0" />
 			</div>
 		</div>
 	)
