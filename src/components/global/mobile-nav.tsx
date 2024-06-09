@@ -1,6 +1,6 @@
 'use client'
 
-import { ClipboardList, LucideIcon, Store } from 'lucide-react'
+import { ClipboardList, LucideIcon, Monitor, Store } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -10,16 +10,33 @@ import { buttonVariants } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 
 import { cn } from '@/lib/utils'
+import { useStocks } from '@/store/order'
 
 interface MobileNavProps extends React.ComponentPropsWithoutRef<'nav'> {}
 
-const links: { href: string; icon: LucideIcon }[] = [
-	{ href: '/', icon: Store },
-	{ href: '/orders', icon: ClipboardList },
-]
-
 export default function MobileNav({ className, ...props }: MobileNavProps) {
+	const stocks = useStocks()
 	const pathname = usePathname()
+
+	const totalItems = stocks.length
+
+	const links: {
+		href: string
+		icon: LucideIcon
+		notification?: React.ReactNode
+	}[] = [
+		{ href: '/', icon: Store },
+		{ href: '/orders', icon: ClipboardList },
+		{
+			href: '/stock-monitor',
+			icon: Monitor,
+			notification: totalItems !== 0 && (
+				<span className="absolute right-0.5 top-0.5 z-20 flex size-4 shrink-0 items-center justify-center rounded-full bg-destructive text-[10px] text-destructive-foreground group-hover/cart-navigation:bg-destructive/90">
+					{totalItems}
+				</span>
+			),
+		},
+	]
 
 	return (
 		<nav
@@ -42,11 +59,12 @@ export default function MobileNav({ className, ...props }: MobileNavProps) {
 								variant: isSelectedLink ? 'default' : 'ghost',
 								size: 'icon',
 							}),
-							'shrink-0',
+							'relative shrink-0',
 							!isSelectedLink && 'hover:bg-accent/80',
 						)}
 					>
 						<Icon className="size-4 shrink-0" />
+						{link.notification}
 					</Link>
 				)
 			})}

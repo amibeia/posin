@@ -37,7 +37,7 @@ export default function ProductSearch() {
 				type="search"
 				autoComplete="off"
 				placeholder="Search by product name"
-				className="max-w-[200px] rounded-xl pl-8"
+				className="max-w-[210px] rounded-xl pl-8"
 				defaultValue={query}
 				onChange={handleChange}
 			/>

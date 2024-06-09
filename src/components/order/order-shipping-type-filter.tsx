@@ -44,6 +44,7 @@ export default function OrderShippingTypeFilter() {
 						variant={isSelectedOption ? 'default' : 'outline'}
 						size="icon"
 						onClick={handleClick}
+						className="shrink-0"
 					>
 						<Icon className="size-4 shrink-0" />
 					</Button>

@@ -36,12 +36,10 @@ const cartStore = create<CartState & CartActions>()(
 							state.cart.find((item) => item.product.id === product.id),
 						)
 
-						const nextCart = isProductSelected
-							? state.cart.filter((item) => item.product.id !== product.id)
-							: [...state.cart, { product, quantity: 1 }]
-
 						return {
-							cart: nextCart,
+							cart: isProductSelected
+								? state.cart.filter((item) => item.product.id !== product.id)
+								: [...state.cart, { product, quantity: 1 }],
 						}
 					}),
 				decreaseItemQuantity: (id) =>

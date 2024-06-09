@@ -35,7 +35,7 @@ import {
 	TransportationMethodOption,
 } from '@/lib/types'
 
-export const LAZY_COMPONENT_DELAY = 1500
+export const LAZY_COMPONENT_DELAY = 2000
 
 export const QUERY_PARAMS = 'query'
 export const CATEGORY_PARAMS = 'category'

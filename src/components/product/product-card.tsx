@@ -1,12 +1,15 @@
 'use client'
 
 import { Circle } from 'lucide-react'
+import { useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
-import { Product } from '@/lib/types'
+import { DEFAULT_ORDER_TYPE, ORDER_TYPE_PARAMS } from '@/lib/constants'
+import { OrderType, Product } from '@/lib/types'
 import { cn, lightenColor, rupiah } from '@/lib/utils'
 import { useCart, useCartActions } from '@/store/cart'
 import { useCategories } from '@/store/category'
+import { useOrderActions, useStocks } from '@/store/order'
 
 interface ProductCardProps extends React.ComponentPropsWithoutRef<'div'> {
 	product: Product
@@ -21,12 +24,25 @@ export default function ProductCard({
 	const categories = useCategories()
 	const cart = useCart()
 	const cartActions = useCartActions()
+	const stocks = useStocks()
+	const orderActions = useOrderActions()
+	const searchParams = useSearchParams()
 
+	const orderTypeParams =
+		(searchParams.get(ORDER_TYPE_PARAMS) as OrderType) || DEFAULT_ORDER_TYPE
+	const isCustomerOrder = orderTypeParams === 'customer-order'
+	const isProductSelected = isCustomerOrder
+		? cart.find((item) => item.product.id === product.id)
+		: stocks.find((stock) => stock.id === product.id)
 	const productCategory = categories.find(
 		(category) => category.id === product.categoryId,
 	)!
 
-	const isProductSelected = cart.find((item) => item.product.id === product.id)
+	const handleClick = () => {
+		isCustomerOrder
+			? cartActions.toggleItem(product)
+			: orderActions.toggleStock(product)
+	}
 
 	return (
 		<div
@@ -49,7 +65,7 @@ export default function ProductCard({
 			)}
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
-			onClick={() => cartActions.toggleItem(product)}
+			onClick={handleClick}
 			{...props}
 		>
 			<div className="flex items-center gap-2">
@@ -68,7 +84,9 @@ export default function ProductCard({
 				/>
 				<span className="text-sm">{product.name}</span>
 			</div>
-			<span className="text-sm font-bold">{rupiah(product.price)}</span>
+			{isCustomerOrder && (
+				<span className="text-sm font-bold">{rupiah(product.price)}</span>
+			)}
 		</div>
 	)
 }
