@@ -1,19 +1,21 @@
 import { clsx, type ClassValue } from 'clsx'
 import { customAlphabet } from 'nanoid'
 import { twMerge } from 'tailwind-merge'
+import * as xlsx from 'xlsx'
 
+import { LAZY_COMPONENT_DELAY } from '@/lib/constants'
 import {
 	ApplyOrderFiltersArgs,
 	ApplyProductFiltersArgs,
 	CartItem,
 	Category,
 	CategoryName,
+	GenerateWorkSheetArgs,
 	NanoidArgs,
 	Order,
 	Product,
 	RGB,
 } from '@/lib/types'
-import { LAZY_COMPONENT_DELAY } from './constants'
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
@@ -162,4 +164,37 @@ export function getOrderTotal(items: CartItem[]): number {
 
 export async function delay(duration: number = LAZY_COMPONENT_DELAY) {
 	return new Promise((resolve) => setTimeout(resolve, duration))
+}
+
+function getRowMaxWidth(rows: any[], defaultWidth: number = 10): number {
+	return rows.reduce(
+		(value, row) => Math.max(value, String(row).length),
+		defaultWidth,
+	)
+}
+
+export function generateWorkSheet<T>({
+	json,
+	options,
+}: GenerateWorkSheetArgs<T>) {
+	const worksheet = xlsx.utils.json_to_sheet(json)
+
+	const [data] = json
+	const keys = Object.keys(data as Object)
+
+	worksheet['!cols'] = keys.map((key) => ({
+		wch: getRowMaxWidth(json.map((data) => data[key as keyof T])),
+	}))
+
+	xlsx.utils.sheet_add_aoa(
+		worksheet,
+		options && options.header
+			? [options.header]
+			: [keys.map((key) => key.toUpperCase())],
+		{
+			origin: 'A1',
+		},
+	)
+
+	return worksheet
 }

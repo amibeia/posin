@@ -6,9 +6,11 @@ import {
 	ORDER_STATUS,
 	ORDER_TYPES,
 	PAYMENT_METHODS,
+	POSIN_ROUTES,
 	TRANSPORTATION_METHODS,
 } from '@/lib/constants'
 
+export type PosinRoute = (typeof POSIN_ROUTES)[number]
 export type CategoryName = (typeof CATEGORIES)[number]
 export type PaymentMethod = (typeof PAYMENT_METHODS)[number]
 export type OrderShippingType = (typeof ORDER_SHIPPING_TYPES)[number]
@@ -94,4 +96,10 @@ export type AddOrderArgs = Pick<Order, 'items'>
 export type NanoidArgs = {
 	size?: number
 	prefix?: string
+}
+export type GenerateWorkSheetArgs<T> = {
+	json: T[]
+	options?: {
+		header?: string[]
+	}
 }

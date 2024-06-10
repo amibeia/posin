@@ -25,7 +25,7 @@ export default function CartItemQuantityInput({
 	return (
 		<div
 			className={cn(
-				'flex w-fit items-center gap-2 rounded-xl border border-input bg-background p-2',
+				'flex w-fit items-center gap-2 rounded-xl border border-input bg-background p-4',
 				className,
 			)}
 			{...props}
@@ -33,7 +33,7 @@ export default function CartItemQuantityInput({
 			<Button
 				variant="ghost"
 				size="icon"
-				className="size-6 shrink-0"
+				className="size-5 shrink-0"
 				onClick={() => cartActions.deleteItem(item.product.id)}
 			>
 				<Trash className="size-4 shrink-0" />
@@ -44,7 +44,7 @@ export default function CartItemQuantityInput({
 				size="icon"
 				disabled={item.quantity <= 1}
 				onClick={() => cartActions.decreaseItemQuantity(item.product.id)}
-				className="size-6 shrink-0"
+				className="size-5 shrink-0"
 			>
 				<Minus className="size-4 shrink-0" />
 			</Button>
@@ -64,7 +64,7 @@ export default function CartItemQuantityInput({
 				variant="ghost"
 				size="icon"
 				onClick={() => cartActions.increaseItemQuantity(item.product.id)}
-				className="size-6 shrink-0"
+				className="size-5 shrink-0"
 			>
 				<Plus className="size-4 shrink-0" />
 			</Button>

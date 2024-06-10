@@ -1,14 +1,17 @@
 'use client'
 
 import { ClipboardList, LucideIcon, Monitor, Store } from 'lucide-react'
+
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import CartDrawer from '@/components/cart/cart-drawer'
+import ExtractToXLSXButton from '@/components/extension/extract-to-xlsx-button'
 import AddProductDrawer from '@/components/product/add-product-drawer'
 import { buttonVariants } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 
+import { PosinRoute } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { useStocks } from '@/store/order'
 
@@ -21,7 +24,7 @@ export default function MobileNav({ className, ...props }: MobileNavProps) {
 	const totalItems = stocks.length
 
 	const links: {
-		href: string
+		href: PosinRoute
 		icon: LucideIcon
 		notification?: React.ReactNode
 	}[] = [
@@ -47,7 +50,7 @@ export default function MobileNav({ className, ...props }: MobileNavProps) {
 			{...props}
 		>
 			{links.map((link) => {
-				const isSelectedLink = link.href === pathname
+				const isActiveLink = link.href === pathname
 				const Icon = link.icon
 
 				return (
@@ -56,11 +59,11 @@ export default function MobileNav({ className, ...props }: MobileNavProps) {
 						href={link.href}
 						className={cn(
 							buttonVariants({
-								variant: isSelectedLink ? 'default' : 'ghost',
+								variant: isActiveLink ? 'default' : 'ghost',
 								size: 'icon',
 							}),
 							'relative shrink-0',
-							!isSelectedLink && 'hover:bg-accent/80',
+							!isActiveLink && 'hover:bg-accent/80',
 						)}
 					>
 						<Icon className="size-4 shrink-0" />
@@ -71,6 +74,7 @@ export default function MobileNav({ className, ...props }: MobileNavProps) {
 			<Separator orientation="vertical" className="mx-1 h-6" />
 			<AddProductDrawer />
 			<CartDrawer />
+			<ExtractToXLSXButton />
 		</nav>
 	)
 }

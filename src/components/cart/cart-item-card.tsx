@@ -23,7 +23,7 @@ export default function CartItemCard({ item }: CartItemCardProps) {
 			</div>
 			<CartItemQuantityInput
 				item={item}
-				className="invisible absolute inset-y-0 right-0 z-10 hidden border-0 border-l p-4 opacity-0 transition-opacity group-hover/cart-item-card:visible group-hover/cart-item-card:flex group-hover/cart-item-card:opacity-100"
+				className="invisible absolute inset-y-0 right-0 z-10 hidden border-0 border-l opacity-0 transition-opacity group-hover/cart-item-card:visible group-hover/cart-item-card:flex group-hover/cart-item-card:opacity-100"
 			/>
 		</div>
 	)

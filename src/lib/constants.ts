@@ -49,6 +49,7 @@ export const PREFIX_PRODUCT_ID = 'P'
 export const PREFIX_CATEGORY_ID = 'C'
 export const PREFIX_ORDER_ID = 'O'
 
+export const POSIN_ROUTES = ['/', '/orders', '/stock-monitor'] as const
 export const CATEGORIES = [
 	'adhesives',
 	'concrete-and-masonry',

@@ -46,7 +46,7 @@ export default function StockCard({
 				variant="ghost"
 				size="icon"
 				onClick={() => orderActions.removeProductFromStock(stock.id)}
-				className="size-6 shrink-0"
+				className="size-5 shrink-0"
 			>
 				<Trash className="size-4 shrink-0" />
 			</Button>
