@@ -20,6 +20,7 @@
 		"@uidotdev/usehooks": "^2.4.1",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
+		"cmdk": "^1.0.0",
 		"dayjs": "^1.11.11",
 		"lucide-react": "^0.381.0",
 		"nanoid": "^5.0.7",
