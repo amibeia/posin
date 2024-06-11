@@ -14,7 +14,7 @@ export default function PaymentMethodFilter() {
 	const params = searchParams.get(PAYMENT_METHOD_PARAMS) || undefined
 
 	return (
-		<section className="flex items-center gap-2">
+		<section className="flex flex-wrap items-center justify-end gap-2">
 			{PAYMENT_METHOD_OPTIONS.map((option) => {
 				const isSelectedOption = params === option.id
 				const Icon = option.icon

@@ -44,6 +44,7 @@ export const ORDER_SHIPPING_TYPE_PARAMS = 'order-shipped-type'
 export const ORDER_TYPE_PARAMS = 'order-type'
 export const PAYMENT_METHOD_PARAMS = 'payment-method'
 export const TRANSPORTATION_METHOD_PARAMS = 'transportation-method'
+export const CATEGORIES_PARAMS = 'categories'
 
 export const PREFIX_PRODUCT_ID = 'P'
 export const PREFIX_CATEGORY_ID = 'C'
@@ -76,7 +77,7 @@ export const DEFAULT_IS_NEED_SHIPPED: boolean = false
 export const DEFAULT_PAYMENT_METHOD: PaymentMethod = 'cash'
 export const DEFAULT_TRANSPORTATION_METHOD: TransportationMethod = 's-truck'
 
-export const CATEGORY_OPTION: CategoryOption[] = [
+export const CATEGORY_OPTIONS: CategoryOption[] = [
 	{ id: 'adhesives', label: 'Adhesives', icon: Package },
 	{
 		id: 'concrete-and-masonry',
@@ -114,7 +115,7 @@ export const TRANSPORTATION_METHOD_OPTIONS: TransportationMethodOption[] = [
 	{ id: 'motor-cycle', label: 'M Cycle', icon: Bike },
 ]
 
-export const CATEGORY_ICONS: LucideIcon[] = CATEGORY_OPTION.map(
+export const CATEGORY_ICONS: LucideIcon[] = CATEGORY_OPTIONS.map(
 	(obj) => obj.icon,
 )
 export const ORDER_STATUS_ICONS: LucideIcon[] = ORDER_STATUS_OPTIONS.map(
@@ -129,7 +130,7 @@ export const TRANSPORTATION_METHOD_ICONS: LucideIcon[] =
 	TRANSPORTATION_METHOD_OPTIONS.map((obj) => obj.icon)
 
 export const CATEGORY_ICON_MAP: Map<CategoryName, LucideIcon> = new Map(
-	CATEGORY_OPTION.map((obj) => [obj.id, obj.icon]),
+	CATEGORY_OPTIONS.map((obj) => [obj.id, obj.icon]),
 )
 export const ORDER_STATUS_ICON_MAP: Map<OrderStatus, LucideIcon> = new Map(
 	ORDER_STATUS_OPTIONS.map((obj) => [obj.id, obj.icon]),

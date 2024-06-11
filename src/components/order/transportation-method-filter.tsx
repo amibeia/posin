@@ -18,7 +18,7 @@ export default function TransportationMethodFilter() {
 	const params = searchParams.get(TRANSPORTATION_METHOD_PARAMS) || undefined
 
 	return (
-		<section className="flex items-center gap-2">
+		<section className="flex flex-wrap items-center justify-end gap-2">
 			{TRANSPORTATION_METHOD_OPTIONS.map((option) => {
 				const isSelectedOption = params === option.id
 				const Icon = option.icon

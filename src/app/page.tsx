@@ -55,8 +55,8 @@ export default function HomePage() {
 					<OrderTypeSwitch />
 				</Suspense>
 			</section>
-			<Suspense fallback={<CategoryCardListSkeleton className="ml-4 py-4" />}>
-				<CategoryCardList className="ml-4 py-4" />
+			<Suspense fallback={<CategoryCardListSkeleton className="py-4" />}>
+				<CategoryCardList className="py-4" />
 			</Suspense>
 			<div className="my-1 px-4">
 				<Separator />

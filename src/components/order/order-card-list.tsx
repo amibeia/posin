@@ -7,6 +7,7 @@ import OrderCard from '@/components/order/order-card'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
 import {
+	CATEGORIES_PARAMS,
 	ORDER_SHIPPING_TYPE_PARAMS,
 	ORDER_STATUS_PARAMS,
 	PAYMENT_METHOD_PARAMS,
@@ -19,6 +20,7 @@ import {
 	TransportationMethod,
 } from '@/lib/types'
 import { applyOrderFilters, cn } from '@/lib/utils'
+import { useCategories } from '@/store/category'
 import { useOrders } from '@/store/order'
 
 interface OrderCardListProps
@@ -26,6 +28,7 @@ interface OrderCardListProps
 
 export default function OrderCardList(props: OrderCardListProps) {
 	const orders = useOrders()
+	const categories = useCategories()
 	const searchParams = useSearchParams()
 
 	const orderStatusParams = searchParams.get(ORDER_STATUS_PARAMS) || undefined
@@ -35,13 +38,18 @@ export default function OrderCardList(props: OrderCardListProps) {
 		searchParams.get(ORDER_SHIPPING_TYPE_PARAMS) || undefined
 	const transportationMethodParams =
 		searchParams.get(TRANSPORTATION_METHOD_PARAMS) || undefined
+	const categoriesParams = searchParams.get(CATEGORIES_PARAMS) || undefined
 
 	const filteredOrders = applyOrderFilters({
 		orders,
-		orderStatus: orderStatusParams as OrderStatus,
-		paymentMethod: paymentMethodParams as PaymentMethod,
-		orderShippingType: orderShippingTypeParams as OrderShippingType,
-		transportationMethod: transportationMethodParams as TransportationMethod,
+		categories,
+		filters: {
+			orderStatus: orderStatusParams as OrderStatus,
+			paymentMethod: paymentMethodParams as PaymentMethod,
+			orderShippingType: orderShippingTypeParams as OrderShippingType,
+			transportationMethod: transportationMethodParams as TransportationMethod,
+			categories: categoriesParams,
+		},
 	})
 
 	return filteredOrders.length !== 0 ? (

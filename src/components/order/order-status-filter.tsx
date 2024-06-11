@@ -14,7 +14,7 @@ export default function OrderStatusFilter() {
 	const params = searchParams.get(ORDER_STATUS_PARAMS) || undefined
 
 	return (
-		<section className="flex items-center gap-2">
+		<section className="flex flex-wrap items-center justify-end gap-2">
 			{ORDER_STATUS_OPTIONS.map((option) => {
 				const isSelectedOption = params === option.id
 				const Icon = option.icon

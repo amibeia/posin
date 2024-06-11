@@ -19,7 +19,10 @@ export default function CategoryCardList(props: CategoryCardListProps) {
 					<CategoryCard
 						key={category.id}
 						category={category}
-						className={cn(categories.length - 1 === index && 'mr-4')}
+						className={cn(
+							categories.length - 1 === index && 'mr-4',
+							index === 0 && 'ml-4',
+						)}
 					/>
 				))}
 			</section>

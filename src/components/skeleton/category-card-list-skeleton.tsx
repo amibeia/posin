@@ -21,6 +21,7 @@ export default function CategoryCardListSkeleton(
 							className={cn(
 								'flex h-[82px] w-[200px] rounded-xl border border-input shadow-sm',
 								size - 1 === index && 'mr-4',
+								index === 0 && 'ml-4',
 							)}
 						/>
 					),

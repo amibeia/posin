@@ -107,39 +107,58 @@ export function applyProductFilters({
 
 export function applyOrderFilters({
 	orders,
-	orderStatus,
-	paymentMethod,
-	orderShippingType,
-	transportationMethod,
+	categories,
+	filters,
 }: ApplyOrderFiltersArgs): Order[] {
 	let filteredOrders = [...orders]
 
-	if (orderStatus) {
+	if (filters && filters.orderStatus) {
 		filteredOrders = filteredOrders.filter(
 			(order) =>
-				(orderStatus === 'completed' && order.hasShipped) ||
-				(orderStatus === 'uncompleted' && !order.hasShipped),
+				(filters.orderStatus === 'completed' && order.hasShipped) ||
+				(filters.orderStatus === 'uncompleted' && !order.hasShipped),
 		)
 	}
 
-	if (paymentMethod) {
+	if (filters && filters.paymentMethod) {
 		filteredOrders = filteredOrders.filter(
-			(order) => order.paymentMethod === paymentMethod,
+			(order) => order.paymentMethod === filters.paymentMethod,
 		)
 	}
 
-	if (orderShippingType) {
+	if (filters && filters.orderShippingType) {
 		filteredOrders = filteredOrders.filter(
 			(order) =>
-				(orderShippingType === 'ship' && order.transportationMethod) ||
-				(orderShippingType === 'shopping-bag' && !order.transportationMethod),
+				(filters.orderShippingType === 'ship' && order.transportationMethod) ||
+				(filters.orderShippingType === 'shopping-bag' &&
+					!order.transportationMethod),
 		)
 	}
 
-	if (transportationMethod) {
+	if (filters && filters.transportationMethod) {
 		filteredOrders = filteredOrders.filter(
-			(order) => order.transportationMethod === transportationMethod,
+			(order) => order.transportationMethod === filters.transportationMethod,
 		)
+	}
+
+	if (filters && filters.categories) {
+		filteredOrders = filteredOrders.filter((order) => {
+			const orderCategories = order.items
+				.map((item) => {
+					const selectedCategory = categories.find(
+						(category) => category.id === item.product.categoryId,
+					)!
+
+					return formatCategoryName(selectedCategory.name)
+				})
+				.filter((value, index, array) => array.indexOf(value) === index)
+				.join(', ')
+
+			return (
+				(filters.categories && filters.categories.includes(orderCategories)) ||
+				(filters.categories && orderCategories.includes(filters.categories))
+			)
+		})
 	}
 
 	return filteredOrders

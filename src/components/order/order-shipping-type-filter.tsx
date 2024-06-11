@@ -19,7 +19,7 @@ export default function OrderShippingTypeFilter() {
 	const params = searchParams.get(ORDER_SHIPPING_TYPE_PARAMS) || undefined
 
 	return (
-		<section className="flex items-center gap-2">
+		<section className="flex flex-wrap items-center justify-end gap-2">
 			{ORDER_SHIPPING_TYPE_OPTIONS.map((option) => {
 				const isSelectedOption = params === option.id
 				const Icon = option.icon

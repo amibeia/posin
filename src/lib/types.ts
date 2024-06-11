@@ -86,10 +86,14 @@ export type ApplyProductFiltersArgs = {
 }
 export type ApplyOrderFiltersArgs = {
 	orders: Order[]
-	orderStatus?: OrderStatus
-	paymentMethod?: PaymentMethod
-	orderShippingType?: OrderShippingType
-	transportationMethod?: TransportationMethod
+	categories: Category[]
+	filters?: {
+		orderStatus?: OrderStatus
+		paymentMethod?: PaymentMethod
+		orderShippingType?: OrderShippingType
+		transportationMethod?: TransportationMethod
+		categories?: string
+	}
 }
 export type AddProductArgs = Omit<Product, 'id'>
 export type AddOrderArgs = Pick<Order, 'items'>
