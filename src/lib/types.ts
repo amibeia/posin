@@ -37,6 +37,18 @@ export type CartItem = {
 }
 export type Cart = CartItem[]
 
+export type Address = {
+	id: string
+	location: string
+}
+
+export type Customer = {
+	id: string
+	name: string
+	phoneNumber: string | null
+	addresses: Address[] | null
+}
+
 export type Order = {
 	id: string
 	items: CartItem[]
@@ -107,3 +119,4 @@ export type GenerateWorkSheetArgs<T> = {
 		header?: string[]
 	}
 }
+export type AddCustomerArgs = Pick<Customer, 'name' | 'phoneNumber'>

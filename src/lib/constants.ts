@@ -49,6 +49,8 @@ export const CATEGORIES_PARAMS = 'categories'
 export const PREFIX_PRODUCT_ID = 'P'
 export const PREFIX_CATEGORY_ID = 'C'
 export const PREFIX_ORDER_ID = 'O'
+export const PREFIX_CUSTOMER_ID = 'U'
+export const PREFIX_ADDRESS_ID = 'A'
 
 export const POSIN_ROUTES = ['/', '/orders', '/stock-monitor'] as const
 export const CATEGORIES = [
