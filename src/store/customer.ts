@@ -2,15 +2,11 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 
 import { PREFIX_ADDRESS_ID, PREFIX_CUSTOMER_ID } from '@/lib/constants'
-import { AddCustomerArgs, Address, Customer } from '@/lib/types'
+import { AddCustomerArgs, Address, Customer, CustomerOrder } from '@/lib/types'
 import { nanoid } from '@/lib/utils'
 
 type CustomerState = {
-	customer:
-		| (Pick<Customer, 'id' | 'name' | 'phoneNumber'> & {
-				address: Address | null
-		  })
-		| null
+	customer: CustomerOrder | null
 	customers: Customer[]
 }
 
@@ -20,6 +16,7 @@ type CustomerActions = {
 		toggleCustomer: (id: Customer['id']) => void
 		addAddressToCustomer: (location: Address['location']) => void
 		toggleAddress: (id: Address['id']) => void
+		reset: () => void
 	}
 }
 
@@ -33,13 +30,13 @@ const customerStore = create<CustomerState & CustomerActions>()(
 		(set) => ({
 			...initialState,
 			actions: {
-				addCustomer: ({ name, phoneNumber }) =>
+				addCustomer: ({ name, phoneNumber = null }) =>
 					set((state) => {
 						const customer: Customer = {
 							id: nanoid({ prefix: PREFIX_CUSTOMER_ID }),
 							name,
 							phoneNumber,
-							addresses: null,
+							addresses: [],
 						}
 
 						return {
@@ -81,14 +78,18 @@ const customerStore = create<CustomerState & CustomerActions>()(
 						}
 
 						return {
+							customer: state.customer
+								? {
+										...state.customer,
+										address,
+									}
+								: state.customer,
 							customers: state.customers.map((customer) => {
 								if (state.customer) {
 									return customer.id === state.customer.id
 										? {
 												...customer,
-												addresses: customer.addresses
-													? [...customer.addresses, address]
-													: [address],
+												addresses: [...customer.addresses, address],
 											}
 										: customer
 								}
@@ -126,15 +127,16 @@ const customerStore = create<CustomerState & CustomerActions>()(
 									id: customer.id,
 									name: customer.name,
 									phoneNumber: customer.phoneNumber,
-									address: customer.addresses
-										? customer.addresses.find((address) => address.id === id)!
-										: null,
+									address: customer.addresses.find(
+										(address) => address.id === id,
+									)!,
 								},
 							}
 						}
 
 						return state
 					}),
+				reset: () => set({ customer: initialState.customer }),
 			},
 		}),
 		{

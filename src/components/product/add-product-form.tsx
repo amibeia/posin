@@ -20,6 +20,7 @@ import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 
 import { CATEGORIES } from '@/lib/constants'
+import { parseCategoryName } from '@/lib/utils'
 import { useCategories } from '@/store/category'
 import { useProductActions } from '@/store/product'
 
@@ -47,7 +48,7 @@ export default function AddProductForm() {
 		categoryName,
 	}: z.infer<typeof formSchema>) => {
 		const selectedCategory = categories.find(
-			(category) => category.name === categoryName,
+			(category) => category.name === parseCategoryName(categoryName),
 		)!
 
 		productActions.addProduct({ name, price, categoryId: selectedCategory.id })

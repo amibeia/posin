@@ -46,12 +46,18 @@ export type Customer = {
 	id: string
 	name: string
 	phoneNumber: string | null
-	addresses: Address[] | null
+	addresses: Address[]
+}
+
+export type CustomerOrder = Pick<Customer, 'id' | 'name' | 'phoneNumber'> & {
+	address: Address | null
 }
 
 export type Order = {
 	id: string
 	items: CartItem[]
+	customer: CustomerOrder | null
+	address: Address | null
 	hasShipped: boolean
 	transportationMethod: TransportationMethod | null
 	paymentMethod: PaymentMethod
@@ -108,7 +114,9 @@ export type ApplyOrderFiltersArgs = {
 	}
 }
 export type AddProductArgs = Omit<Product, 'id'>
-export type AddOrderArgs = Pick<Order, 'items'>
+export type AddOrderArgs = Pick<Order, 'items'> & {
+	customer: CustomerOrder | null
+}
 export type NanoidArgs = {
 	size?: number
 	prefix?: string

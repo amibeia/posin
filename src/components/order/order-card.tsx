@@ -39,9 +39,24 @@ export default function OrderCard({
 						<span className="text-sm font-bold">{order.id}</span>
 						<OrderIcons order={order} />
 					</div>
-					<span className="text-sm">
+					<span className="text-xs">
 						{dayjs(order.createdAt).format('lll')}
 					</span>
+					{order.customer && (
+						<div className="flex flex-col gap-1">
+							<span className="text-sm font-semibold">
+								{order.customer.name}
+							</span>
+							{order.customer.phoneNumber && (
+								<span className="text-xs">{order.customer.phoneNumber}</span>
+							)}
+							{order.transportationMethod && order.customer.address && (
+								<span className="text-xs">
+									{order.customer.address.location}
+								</span>
+							)}
+						</div>
+					)}
 				</div>
 				<CategoryBadgeList items={order.items} />
 			</section>

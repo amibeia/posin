@@ -2,7 +2,7 @@
 
 import { Check } from 'lucide-react'
 
-import AddCustomerButton from '@/components/customer/add-customer-button'
+import AddCustomerAddressButton from '@/components/customer/add-customer-address-button'
 import {
 	Command,
 	CommandEmpty,
@@ -13,18 +13,18 @@ import {
 } from '@/components/ui/command'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
-import { Customer } from '@/lib/types'
+import { Address } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { useCustomer, useCustomerActions } from '@/store/customer'
 
 interface CategoryCommandProps
 	extends React.ComponentPropsWithoutRef<typeof Command> {
-	customers: Customer[]
+	addresses: Address[]
 	onSelect: () => void
 }
 
-export default function CustomerCommand({
-	customers,
+export default function CustomerAddressCommand({
+	addresses,
 	onSelect,
 	className,
 	...props
@@ -34,29 +34,30 @@ export default function CustomerCommand({
 
 	return (
 		<Command className={cn('flex flex-col gap-4', className)} {...props}>
-			<CommandInput placeholder="Search by customer name" />
+			<CommandInput placeholder="Search by address location" />
 			<ScrollArea className="flex-1">
 				<CommandList className="max-h-none flex-1 overflow-hidden">
 					<CommandEmpty className="flex flex-col items-center justify-center gap-4">
-						<span>No customer found.</span>
-						<AddCustomerButton onClick={onSelect} />
+						<span>No address found.</span>
+						<AddCustomerAddressButton onClick={onSelect} />
 					</CommandEmpty>
 					<CommandGroup className="flex flex-1 flex-col gap-2 p-0">
-						{customers.map((customer, index) => {
-							const isSelectedCustomer = selectedCustomer
-								? selectedCustomer.id === customer.id
-								: false
+						{addresses.map((address, index) => {
+							const isAddressSelected =
+								selectedCustomer && selectedCustomer.address
+									? selectedCustomer.address.id === address.id
+									: false
 
 							const handleSelect = () => {
-								customerActions.toggleCustomer(customer.id)
+								customerActions.toggleAddress(address.id)
 
 								onSelect()
 							}
 
 							return (
 								<CommandItem
-									key={customer.id}
-									value={customer.name}
+									key={address.id}
+									value={address.location}
 									onSelect={handleSelect}
 									className={cn(
 										'cursor-pointer gap-2 rounded-none border border-input bg-background shadow-sm',
@@ -66,10 +67,10 @@ export default function CustomerCommand({
 									<Check
 										className={cn(
 											'size-4 shrink-0 opacity-0 transition-opacity',
-											isSelectedCustomer && 'opacity-100',
+											isAddressSelected && 'opacity-100',
 										)}
 									/>
-									<span className="text-sm">{customer.name}</span>
+									<span className="text-sm">{address.location}</span>
 								</CommandItem>
 							)
 						})}

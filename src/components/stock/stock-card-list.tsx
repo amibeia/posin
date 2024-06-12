@@ -2,7 +2,7 @@
 
 import { PackageOpen } from 'lucide-react'
 
-import StockCard from '@/components/order/stock-card'
+import StockCard from '@/components/stock/stock-card'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
 import { cn } from '@/lib/utils'

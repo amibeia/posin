@@ -43,7 +43,7 @@ export default function SelectCustomerDrawer() {
 					className="flex-1 p-3"
 				/>
 				<Separator />
-				<DrawerFooter className="flex-row justify-between">
+				<DrawerFooter>
 					<DrawerClose asChild>
 						<Button
 							variant="outline"

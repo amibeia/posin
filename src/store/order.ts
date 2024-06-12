@@ -54,13 +54,15 @@ const orderStore = create<OrderState & OrderActions>()(
 		(set) => ({
 			...initialState,
 			actions: {
-				addOrder: ({ items }) =>
+				addOrder: ({ items, customer = null }) =>
 					set((state) => ({
 						orders: [
 							...state.orders,
 							{
 								id: nanoid({ prefix: PREFIX_ORDER_ID }),
 								items,
+								customer,
+								address: customer ? customer.address : null,
 								hasShipped: state.order.isNeedShipped ? false : true,
 								transportationMethod: state.order.transportationMethod,
 								paymentMethod: state.order.paymentMethod,

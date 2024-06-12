@@ -1,4 +1,4 @@
-import CategoriesFilter from '@/components/order/categories-filter'
+import CategoriesFilter from '@/components/category/categories-filter'
 import OrderShippingTypeFilter from '@/components/order/order-shipping-type-filter'
 import OrderStatusFilter from '@/components/order/order-status-filter'
 import PaymentMethodFilter from '@/components/order/payment-method-filter'

@@ -1,4 +1,4 @@
-import StockCardList from '@/components/order/stock-card-list'
+import StockCardList from '@/components/stock/stock-card-list'
 
 export default function StockMonitorPage() {
 	return (
