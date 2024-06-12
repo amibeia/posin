@@ -26,6 +26,7 @@ import {
 
 export default function OrderFiltersDrawer() {
 	const [open, setOpen] = useState(false)
+
 	const router = useRouter()
 	const pathname = usePathname()
 	const searchParams = useSearchParams()

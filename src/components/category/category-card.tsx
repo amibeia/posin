@@ -17,6 +17,7 @@ export default function CategoryCard({
 	...props
 }: CategoryCardProps) {
 	const [isHovered, setIsHovered] = useState(false)
+
 	const router = useRouter()
 	const pathname = usePathname()
 	const searchParams = useSearchParams()
@@ -39,6 +40,9 @@ export default function CategoryCard({
 
 	return (
 		<div
+			onMouseEnter={() => setIsHovered(true)}
+			onMouseLeave={() => setIsHovered(false)}
+			onClick={handleClick}
 			style={{
 				color: isHovered
 					? 'hsl(var(--accent-foreground))'
@@ -56,9 +60,6 @@ export default function CategoryCard({
 				'flex w-[200px] cursor-pointer items-center justify-between gap-4 rounded-xl border border-input p-4 shadow-sm transition-colors',
 				className,
 			)}
-			onMouseEnter={() => setIsHovered(true)}
-			onMouseLeave={() => setIsHovered(false)}
-			onClick={handleClick}
 			{...props}
 		>
 			<span className="text-sm">{category.name}</span>

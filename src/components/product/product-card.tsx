@@ -23,9 +23,10 @@ export default function ProductCard({
 	const [isHovered, setIsHovered] = useState(false)
 	const categories = useCategories()
 	const cart = useCart()
-	const cartActions = useCartActions()
 	const stocks = useStocks()
+	const cartActions = useCartActions()
 	const orderActions = useOrderActions()
+
 	const searchParams = useSearchParams()
 
 	const orderTypeParams =
@@ -46,6 +47,9 @@ export default function ProductCard({
 
 	return (
 		<div
+			onMouseEnter={() => setIsHovered(true)}
+			onMouseLeave={() => setIsHovered(false)}
+			onClick={handleClick}
 			style={{
 				color: isHovered
 					? 'hsl(var(--accent-foreground))'
@@ -63,9 +67,6 @@ export default function ProductCard({
 				'flex cursor-pointer items-center justify-between gap-4 rounded-xl border border-input p-4 shadow-sm transition-colors',
 				className,
 			)}
-			onMouseEnter={() => setIsHovered(true)}
-			onMouseLeave={() => setIsHovered(false)}
-			onClick={handleClick}
 			{...props}
 		>
 			<div className="flex items-center gap-2">

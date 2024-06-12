@@ -36,10 +36,10 @@ export default function ProductSearch() {
 				id="product-search"
 				type="search"
 				autoComplete="off"
-				placeholder="Search by product name"
-				className="max-w-[210px] rounded-xl pl-8"
 				defaultValue={query}
 				onChange={handleChange}
+				placeholder="Search by product name"
+				className="max-w-[210px] rounded-xl pl-8"
 			/>
 		</div>
 	)

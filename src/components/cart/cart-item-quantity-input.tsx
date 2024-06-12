@@ -33,8 +33,8 @@ export default function CartItemQuantityInput({
 			<Button
 				variant="ghost"
 				size="icon"
-				className="size-5 shrink-0"
 				onClick={() => cartActions.deleteItem(item.product.id)}
+				className="size-5 shrink-0"
 			>
 				<Trash className="size-4 shrink-0" />
 			</Button>

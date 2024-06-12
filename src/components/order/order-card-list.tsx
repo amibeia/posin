@@ -29,6 +29,7 @@ interface OrderCardListProps
 export default function OrderCardList(props: OrderCardListProps) {
 	const orders = useOrders()
 	const categories = useCategories()
+
 	const searchParams = useSearchParams()
 
 	const orderStatusParams = searchParams.get(ORDER_STATUS_PARAMS) || undefined
@@ -59,7 +60,7 @@ export default function OrderCardList(props: OrderCardListProps) {
 					<OrderCard
 						key={order.id}
 						order={order}
-						className={cn(filteredOrders.length - 1 === index && 'mb-[65px]')}
+						className={cn(index === filteredOrders.length - 1 && 'mb-[65px]')}
 					/>
 				))}
 			</section>

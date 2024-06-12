@@ -25,7 +25,7 @@ export default function StockCardList(props: StockCardListProps) {
 						<StockCard
 							key={stock.id}
 							stock={stock}
-							className={cn(stocks.length - 1 === index && 'mb-[65px]')}
+							className={cn(index === stocks.length - 1 && 'mb-[65px]')}
 						/>
 					))}
 			</section>

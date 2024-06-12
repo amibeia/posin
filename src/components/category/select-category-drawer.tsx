@@ -24,6 +24,7 @@ const SelectCategoryDrawer = forwardRef<HTMLButtonElement, ButtonProps>(
 	({ className, ...props }, ref) => {
 		const [open, setOpen] = useState(false)
 		const categories = useCategories()
+
 		const formContext = useFormContext()
 
 		const selectedCategoryName = formContext.getValues('categoryName')
@@ -50,7 +51,7 @@ const SelectCategoryDrawer = forwardRef<HTMLButtonElement, ButtonProps>(
 							className="size-4 shrink-0"
 						/>
 						<span className="text-sm">
-							{selectedCategory ? selectedCategory.name : 'Select category'}
+							{selectedCategory ? selectedCategory.name : 'Select Category'}
 						</span>
 						<ChevronsUpDown className="size-4 shrink-0" />
 					</Button>

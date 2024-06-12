@@ -4,6 +4,7 @@ import { ArrowDown } from 'lucide-react'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
+import SelectCustomerDrawer from '@/components/customer/select-customer-drawer'
 import PaymentMethodOptionList from '@/components/order/payment-method-option-list'
 import TransportationMethodOptionList from '@/components/order/transportation-method-option-list'
 import { Button } from '@/components/ui/button'
@@ -26,8 +27,8 @@ import { useOrder, useOrderActions } from '@/store/order'
 
 export default function CheckoutDrawer() {
 	const [open, setOpen] = useState(false)
-	const order = useOrder()
 	const cart = useCart()
+	const order = useOrder()
 	const cartActions = useCartActions()
 	const orderActions = useOrderActions()
 
@@ -65,6 +66,10 @@ export default function CheckoutDrawer() {
 				</DrawerHeader>
 				<section className="flex flex-1 flex-col justify-between p-4">
 					<div className="flex flex-1 flex-col gap-4">
+						<section className="flex flex-col gap-2">
+							<Label>Customer</Label>
+							<SelectCustomerDrawer />
+						</section>
 						<section className="flex flex-col gap-1">
 							<div className="flex items-center justify-between">
 								<Label>Ship this order</Label>

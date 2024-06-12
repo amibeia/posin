@@ -28,11 +28,15 @@ export default function OrderTypeSwitch() {
 		router.replace(`${pathname}?${urlSearchParams.toString()}`)
 	}
 
+	const iconStyle = {
+		className: 'size-4 shrink-0 text-muted-foreground transition-colors',
+	}
+
 	return (
 		<div className="flex items-center gap-2">
 			<ListMinus
 				className={cn(
-					'size-4 shrink-0 text-muted-foreground transition-colors',
+					iconStyle.className,
 					orderType === 'customer-order' && 'text-accent-foreground',
 				)}
 			/>
@@ -42,7 +46,7 @@ export default function OrderTypeSwitch() {
 			/>
 			<ListPlus
 				className={cn(
-					'size-4 shrink-0 text-muted-foreground transition-colors',
+					iconStyle.className,
 					orderType === 'inventory-order' && 'text-accent-foreground',
 				)}
 			/>

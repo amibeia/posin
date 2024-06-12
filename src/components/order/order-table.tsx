@@ -22,7 +22,7 @@ export default function OrderTable({ order, ...props }: OrderTableProps) {
 		<Table {...props}>
 			<TableHeader>
 				<TableRow>
-					<TableHead className="w-[30px] text-center">Qt</TableHead>
+					<TableHead className="w-[30px] text-center">Qty</TableHead>
 					<TableHead>Item</TableHead>
 					<TableHead className="w-[110px] text-right">Price</TableHead>
 				</TableRow>

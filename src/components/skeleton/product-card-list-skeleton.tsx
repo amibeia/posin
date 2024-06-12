@@ -20,7 +20,7 @@ export default function ProductCardListSkeleton(
 							key={id}
 							className={cn(
 								'flex h-[54px] rounded-xl border border-input shadow-sm',
-								size - 1 === index && 'mb-[65px]',
+								index === size - 1 && 'mb-[65px]',
 							)}
 						/>
 					),

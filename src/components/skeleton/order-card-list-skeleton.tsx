@@ -20,7 +20,7 @@ export default function OrderCardListSkeleton(
 							key={id}
 							className={cn(
 								'flex h-[400px] rounded-xl border border-input shadow-sm',
-								size - 1 === index && 'mb-[65px]',
+								index === size - 1 && 'mb-[65px]',
 							)}
 						/>
 					),

@@ -18,11 +18,11 @@ interface ProductCardList
 export default function ProductCardList(props: ProductCardList) {
 	const products = useProducts()
 	const categories = useCategories()
+
 	const searchParams = useSearchParams()
 
 	const queryParams = searchParams.get(QUERY_PARAMS) || undefined
 	const categoryParams = searchParams.get(CATEGORY_PARAMS) || undefined
-
 	const selectedCategory = categoryParams
 		? categories.find(
 				(category) =>
@@ -48,7 +48,7 @@ export default function ProductCardList(props: ProductCardList) {
 							key={product.id}
 							product={product}
 							className={cn(
-								filteredProducts.length - 1 === index && 'mb-[65px]',
+								index === filteredProducts.length - 1 && 'mb-[65px]',
 							)}
 						/>
 					))}

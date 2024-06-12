@@ -4,6 +4,7 @@ import OrderStatusFilter from '@/components/order/order-status-filter'
 import PaymentMethodFilter from '@/components/order/payment-method-filter'
 import TransportationMethodFilter from '@/components/order/transportation-method-filter'
 import { Label } from '@/components/ui/label'
+import { Separator } from '@/components/ui/separator'
 
 export default function OrderFilters() {
 	return (
@@ -24,8 +25,9 @@ export default function OrderFilters() {
 				<Label>Transportation Method</Label>
 				<TransportationMethodFilter />
 			</div>
+			<Separator />
 			<div className="flex items-center justify-between gap-4">
-				<Label>Category</Label>
+				<Label>Categories</Label>
 				<CategoriesFilter />
 			</div>
 		</section>

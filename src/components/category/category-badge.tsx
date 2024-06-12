@@ -21,13 +21,13 @@ export default function CategoryBadge({ name, color, total }: CategoryBadge) {
 
 	return (
 		<Badge
+			onMouseEnter={() => setIsHovered(true)}
+			onMouseLeave={() => setIsHovered(false)}
 			style={{
 				backgroundColor: isHovered
 					? lightenColor(color, 30)
 					: lightenColor(color, 50),
 			}}
-			onMouseEnter={() => setIsHovered(true)}
-			onMouseLeave={() => setIsHovered(false)}
 		>
 			<Icon className="mr-2 size-4 shrink-0" />
 			<span>{total}</span>
