@@ -32,43 +32,42 @@ const customerStore = create<CustomerState & CustomerActions>()(
 			actions: {
 				addCustomer: ({ name, phoneNumber = null }) =>
 					set((state) => {
-						const customer: Customer = {
+						const customer: CustomerOrder = {
 							id: nanoid({ prefix: PREFIX_CUSTOMER_ID }),
 							name,
 							phoneNumber,
-							addresses: [],
+							address: null,
 						}
 
 						return {
-							customer: {
-								id: customer.id,
-								name: customer.name,
-								phoneNumber: customer.phoneNumber,
-								address: null,
-							},
-							customers: [...state.customers, customer],
+							customer,
+							customers: [
+								...state.customers,
+								{
+									id: customer.id,
+									name: customer.name,
+									phoneNumber: customer.phoneNumber,
+									addresses: [],
+								},
+							],
 						}
 					}),
 				toggleCustomer: (id) =>
 					set((state) => {
-						if (state.customer && state.customer.id === id) {
-							return {
-								customer: null,
-							}
-						}
-
 						const customer = state.customers.find(
 							(customer) => customer.id === id,
 						)!
 
-						return {
-							customer: {
-								id: customer.id,
-								name: customer.name,
-								phoneNumber: customer.phoneNumber,
-								address: null,
-							},
-						}
+						return state.customer && state.customer.id === id
+							? { customer: null }
+							: {
+									customer: {
+										id: customer.id,
+										name: customer.name,
+										phoneNumber: customer.phoneNumber,
+										address: null,
+									},
+								}
 					}),
 				addAddressToCustomer: (location) =>
 					set((state) => {
@@ -77,64 +76,42 @@ const customerStore = create<CustomerState & CustomerActions>()(
 							location,
 						}
 
-						return {
-							customer: state.customer
-								? {
+						return state.customer
+							? {
+									customer: {
 										...state.customer,
 										address,
-									}
-								: state.customer,
-							customers: state.customers.map((customer) => {
-								if (state.customer) {
-									return customer.id === state.customer.id
-										? {
-												...customer,
-												addresses: [...customer.addresses, address],
-											}
-										: customer
+									},
+									customers: state.customers.map((customer) => {
+										return state.customer && state.customer.id === customer.id
+											? {
+													...customer,
+													addresses: [...customer.addresses, address],
+												}
+											: customer
+									}),
 								}
-
-								return customer
-							}),
-						}
+							: state
 					}),
 				toggleAddress: (id) =>
 					set((state) => {
 						const customer = state.customers.find((customer) => {
-							if (state.customer) {
-								return customer.id === state.customer.id
-							}
-
-							return false
+							return state.customer && state.customer.id === customer.id
 						})!
 
-						if (
-							state.customer &&
-							state.customer.address &&
-							state.customer.address.id === id
-						) {
-							return {
-								customer: {
-									...state.customer,
-									address: null,
-								},
-							}
-						}
-
-						if (customer.addresses) {
-							return {
-								customer: {
-									id: customer.id,
-									name: customer.name,
-									phoneNumber: customer.phoneNumber,
-									address: customer.addresses.find(
-										(address) => address.id === id,
-									)!,
-								},
-							}
-						}
-
-						return state
+						return state.customer
+							? {
+									customer: {
+										...state.customer,
+										address:
+											state.customer.address && state.customer.address.id === id
+												? null
+												: customer.addresses.find(
+														(address) => address.id === id,
+													)!,
+									},
+								}
+							: state
 					}),
 				reset: () => set({ customer: initialState.customer }),
 			},

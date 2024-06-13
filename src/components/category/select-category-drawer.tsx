@@ -1,15 +1,14 @@
 'use client'
 
-import { ArrowDown, ChevronsUpDown, Circle } from 'lucide-react'
+import { ChevronsUpDown, Circle } from 'lucide-react'
 import { forwardRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import CategoryCommand from '@/components/category/category-command'
+import DrawerFooter from '@/components/global/drawer-footer'
 import { Button, ButtonProps } from '@/components/ui/button'
 import {
-	DrawerClose,
 	DrawerContent,
-	DrawerFooter,
 	DrawerHeader,
 	DrawerNested,
 	DrawerTitle,
@@ -66,17 +65,7 @@ const SelectCategoryDrawer = forwardRef<HTMLButtonElement, ButtonProps>(
 						className="flex-1 p-3"
 					/>
 					<Separator />
-					<DrawerFooter className="flex-row">
-						<DrawerClose asChild>
-							<Button
-								variant="outline"
-								size="icon"
-								className="size-10 shrink-0 rounded-full"
-							>
-								<ArrowDown className="size-4 shrink-0" />
-							</Button>
-						</DrawerClose>
-					</DrawerFooter>
+					<DrawerFooter />
 				</DrawerContent>
 			</DrawerNested>
 		)

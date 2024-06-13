@@ -63,7 +63,7 @@ const orderStore = create<OrderState & OrderActions>()(
 								items,
 								customer,
 								address: customer ? customer.address : null,
-								hasShipped: state.order.isNeedShipped ? false : true,
+								hasShipped: !state.order.isNeedShipped,
 								transportationMethod: state.order.transportationMethod,
 								paymentMethod: state.order.paymentMethod,
 								createdAt: new Date(),

@@ -1,17 +1,16 @@
 'use client'
 
-import { ArrowDown, ShoppingCart } from 'lucide-react'
+import { ShoppingCart } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 import CartItemCardList from '@/components/cart/cart-item-card-list'
+import DrawerFooter from '@/components/global/drawer-footer'
 import CheckoutDrawer from '@/components/order/checkout-drawer'
 import { Button } from '@/components/ui/button'
 import {
 	Drawer,
-	DrawerClose,
 	DrawerContent,
 	DrawerDescription,
-	DrawerFooter,
 	DrawerHeader,
 	DrawerTitle,
 	DrawerTrigger,
@@ -62,24 +61,13 @@ export default function CartDrawer() {
 					</DrawerDescription>
 				</DrawerHeader>
 				<CartItemCardList cart={cart} className="my-4 flex-1 px-4" />
+				<section className="mt-auto flex items-center justify-between p-4">
+					<span className="text-base">Total</span>
+					<span className="text-base font-bold">{rupiah(total)}</span>
+				</section>
 				<Separator />
-				<DrawerFooter className="gap-4">
-					<div className="flex items-center justify-between">
-						<span className="text-base">Total</span>
-						<span className="text-base font-bold">{rupiah(total)}</span>
-					</div>
-					<div className="flex items-center justify-between">
-						<DrawerClose asChild>
-							<Button
-								variant="outline"
-								size="icon"
-								className="size-10 shrink-0 rounded-full"
-							>
-								<ArrowDown className="size-4 shrink-0" />
-							</Button>
-						</DrawerClose>
-						<CheckoutDrawer />
-					</div>
+				<DrawerFooter>
+					<CheckoutDrawer />
 				</DrawerFooter>
 			</DrawerContent>
 		</Drawer>

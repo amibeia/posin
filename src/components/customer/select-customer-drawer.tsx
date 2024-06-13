@@ -1,14 +1,13 @@
 'use client'
 
-import { ArrowDown, User } from 'lucide-react'
+import { User } from 'lucide-react'
 import { useState } from 'react'
 
 import CustomerCommand from '@/components/customer/customer-command'
+import DrawerFooter from '@/components/global/drawer-footer'
 import { Button } from '@/components/ui/button'
 import {
-	DrawerClose,
 	DrawerContent,
-	DrawerFooter,
 	DrawerHeader,
 	DrawerNested,
 	DrawerTitle,
@@ -43,17 +42,7 @@ export default function SelectCustomerDrawer() {
 					className="flex-1 p-3"
 				/>
 				<Separator />
-				<DrawerFooter>
-					<DrawerClose asChild>
-						<Button
-							variant="outline"
-							size="icon"
-							className="size-10 shrink-0 rounded-full"
-						>
-							<ArrowDown className="size-4 shrink-0" />
-						</Button>
-					</DrawerClose>
-				</DrawerFooter>
+				<DrawerFooter />
 			</DrawerContent>
 		</DrawerNested>
 	)

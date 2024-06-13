@@ -1,14 +1,13 @@
 'use client '
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ArrowDown } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
 import SelectCategoryDrawer from '@/components/category/select-category-drawer'
+import DrawerFooter from '@/components/global/drawer-footer'
 import { Button } from '@/components/ui/button'
-import { DrawerClose } from '@/components/ui/drawer'
 import {
 	Form,
 	FormControl,
@@ -123,17 +122,7 @@ export default function AddProductForm() {
 					</div>
 				</section>
 				<Separator />
-				<section className="mt-auto flex items-center justify-between p-4">
-					<DrawerClose asChild>
-						<Button
-							type="button"
-							variant="outline"
-							size="icon"
-							className="size-10 shrink-0 rounded-full"
-						>
-							<ArrowDown className="size-4 shrink-0" />
-						</Button>
-					</DrawerClose>
+				<DrawerFooter>
 					<Button
 						type="submit"
 						size="lg"
@@ -142,7 +131,7 @@ export default function AddProductForm() {
 					>
 						Add Product
 					</Button>
-				</section>
+				</DrawerFooter>
 			</form>
 		</Form>
 	)

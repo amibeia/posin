@@ -1,14 +1,13 @@
 'use client'
 
-import { ArrowDown, MapPin } from 'lucide-react'
+import { MapPin } from 'lucide-react'
 import { forwardRef, useState } from 'react'
 
 import CustomerAddressCommand from '@/components/customer/customer-address-command'
+import DrawerFooter from '@/components/global/drawer-footer'
 import { Button, ButtonProps } from '@/components/ui/button'
 import {
-	DrawerClose,
 	DrawerContent,
-	DrawerFooter,
 	DrawerHeader,
 	DrawerNested,
 	DrawerTitle,
@@ -58,17 +57,7 @@ const SelectCustomerAddressDrawer = forwardRef<HTMLButtonElement, ButtonProps>(
 						className="flex-1 p-3"
 					/>
 					<Separator />
-					<DrawerFooter>
-						<DrawerClose asChild>
-							<Button
-								variant="outline"
-								size="icon"
-								className="size-10 shrink-0 rounded-full"
-							>
-								<ArrowDown className="size-4 shrink-0" />
-							</Button>
-						</DrawerClose>
-					</DrawerFooter>
+					<DrawerFooter />
 				</DrawerContent>
 			</DrawerNested>
 		)

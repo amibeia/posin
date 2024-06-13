@@ -1,21 +1,21 @@
 'use client'
 
-import { ArrowDown, SlidersHorizontal } from 'lucide-react'
+import { SlidersHorizontal } from 'lucide-react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
+import DrawerFooter from '@/components/global/drawer-footer'
 import OrderFilters from '@/components/order/order-filters'
 import { Button } from '@/components/ui/button'
 import {
 	Drawer,
-	DrawerClose,
 	DrawerContent,
-	DrawerFooter,
 	DrawerHeader,
 	DrawerTitle,
 	DrawerTrigger,
 } from '@/components/ui/drawer'
 import { Separator } from '@/components/ui/separator'
+
 import {
 	CATEGORIES_PARAMS,
 	ORDER_SHIPPING_TYPE_PARAMS,
@@ -64,16 +64,7 @@ export default function OrderFiltersDrawer() {
 				</DrawerHeader>
 				<OrderFilters />
 				<Separator />
-				<DrawerFooter className="flex-row justify-between">
-					<DrawerClose asChild>
-						<Button
-							variant="outline"
-							size="icon"
-							className="size-10 shrink-0 rounded-full"
-						>
-							<ArrowDown className="size-4 shrink-0" />
-						</Button>
-					</DrawerClose>
+				<DrawerFooter>
 					<Button
 						size="lg"
 						className="rounded-full"
